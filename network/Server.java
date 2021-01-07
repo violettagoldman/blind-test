@@ -7,19 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService; 
-import java.util.concurrent.Executors; 
+import java.util.concurrent.Executors;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Server implements Runnable, SocketListener {
     private final List<SocketManager> sockets;
     private final ExecutorService pool;
     private final Map<SocketManager, User> activeUsers;
     private final Map<String, Integer> questions;
+    private final Map<String, Timer> timers;
+
+    final int POINTS = 3;
+    final int SECONDSCLOSE = 10;
+    final int SECONDSTIMEOUT = 5;
 
     public Server() {
         this.sockets = new ArrayList<SocketManager>();
         this.activeUsers = new HashMap<SocketManager, User>();
         this.pool = Executors.newCachedThreadPool();
         this.questions = new HashMap<String, Integer>();
+        this.timers = new HashMap<String, Timer>();
     }
 
     public void run() {
@@ -44,7 +52,9 @@ public class Server implements Runnable, SocketListener {
     }
 
     public void broadcastChannel(Payload payload, String channel) {
-        for (SocketManager sm : sockets) {
+        for (SocketManager sm : activeUsers.keySet()) {
+            System.out.println("sm: " + sm);
+            System.out.println(activeUsers.get(sm));
             if (activeUsers.get(sm).getChannel().equals(channel))
                 sm.send(payload);
         }
@@ -70,10 +80,30 @@ public class Server implements Runnable, SocketListener {
     }
 
     public void chooseQuestion(String channel) {
+        timers.put(channel, new Timer());
+        timers.get(channel).schedule(new Task(channel), SECONDSTIMEOUT * 1000);
         questions.put(channel, game.Quiz.getInstance().randomQuestionId());
         Payload payload = new Payload(Payload.Type.QUESTION);
         payload.addProperty("id", questions.get(channel) + "");
         broadcastChannel(payload, channel);
+    }
+
+    public void timesUp(String channel) {
+        sendMessage("Time is up!", channel);
+        chooseQuestion(channel);
+    }
+
+    class Task extends TimerTask {
+        private String channel;
+
+        public Task(String channel) {
+            this.channel = channel;
+        }
+
+        public void run() {
+            timers.get(channel).cancel();
+            timesUp(channel);
+        }
     }
 
     public void sendMessage(String message, String channel) {
@@ -81,7 +111,7 @@ public class Server implements Runnable, SocketListener {
         payload.addProperty("message", message);
         payload.addProperty("user", "BOT");
         payload.addProperty("smile", false + "");
-        payload.addProperty("avatar", "avatar/2.png");
+        payload.addProperty("avatar", "../game/assets/images/bot.png");
         broadcastChannel(payload, channel);
     }
 
@@ -94,6 +124,46 @@ public class Server implements Runnable, SocketListener {
         }
         payload.addProperty("blockedChannels", channels);
         sm.send(payload);
+    }
+
+    public void sendOngoing() { // blocked channels
+        Payload payload = new Payload(Payload.Type.ONGOING);
+        String channels = "";
+        for (String channel : questions.keySet()) {
+            if (questions.get(channel) != -1)
+                channels += channel + "\2";
+        }
+        payload.addProperty("blockedChannels", channels);
+        broadcast(payload);
+    }
+
+    public void closeChannel(String channel) {
+        Payload payload = new Payload(Payload.Type.CLOSE);
+        broadcastChannel(payload, channel);;
+        questions.remove(channel);
+        timers.remove(channel);
+        sendOngoing();
+    }
+
+    public void endGame(String channel, User u) {
+        String msg = u.getName() + " has won! You have one minute to leave the room. See you!";
+        sendMessage(msg, channel);
+        timers.get(channel).cancel();
+        timers.put(channel, new Timer());
+        timers.get(channel).schedule(new CloseTask(channel), SECONDSCLOSE * 1000);
+    }
+
+    class CloseTask extends TimerTask {
+        private String channel;
+
+        public CloseTask(String channel) {
+            this.channel = channel;
+        }
+
+        public void run() {
+            timers.get(channel).cancel();
+            closeChannel(channel);
+        }
     }
 
     public static void main(String[] argv) {
@@ -119,10 +189,10 @@ public class Server implements Runnable, SocketListener {
         if (payload.getType() == Payload.Type.CONNECTION) {
             activeUsers.put(sm, new User(payload.getProps().get("user"),
                 payload.getProps().get("avatar")));
+            System.out.println("New sm: " + sm);
             sendOngoing(sm);
         }
         if (payload.getType() == Payload.Type.CHANNEL && activeUsers.get(sm) != null) {
-            System.out.println(activeUsers.get(sm).getName() + " is in " + payload.getProps().get("channel"));
             activeUsers.get(sm).setChannel(payload.getProps().get("channel"));
             questions.put(payload.getProps().get("channel"), -1);
             broadcastLeaderboard(payload.getProps().get("channel"));
@@ -133,7 +203,17 @@ public class Server implements Runnable, SocketListener {
             if (questions.get(activeUsers.get(sm).getChannel()) != -1) // check if the game has started
             {
                 if (payload.getProps().get("message").length() == 2) {
+                    timers.get(activeUsers.get(sm).getChannel()).cancel();
                     sendMessage(activeUsers.get(sm).getName() + " has the answer!", activeUsers.get(sm).getChannel());
+                    activeUsers.get(sm).incrementScore();
+                    broadcastLeaderboard(activeUsers.get(sm).getChannel());
+                    for (SocketManager m : activeUsers.keySet()) {
+                        if (activeUsers.get(m).getScore() == POINTS && activeUsers.get(m).getChannel() == activeUsers.get(sm).getChannel()) {
+                            endGame(activeUsers.get(sm).getChannel(), activeUsers.get(m));
+                            return ;
+                        }
+
+                    }
                     chooseQuestion(activeUsers.get(sm).getChannel());
                 }
                 else

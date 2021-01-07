@@ -26,10 +26,9 @@ public class Quiz {
 
     public void populateQuiz() {
         // add questions here
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "https://www.discobuzz.fr/9942-17567-large_default/lomepal-amina-limited-edition-trifold-triple-lp-vinyl-album-holographic-cover.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "https://www.discobuzz.fr/9942-17567-large_default/lomepal-amina-limited-edition-trifold-triple-lp-vinyl-album-holographic-cover.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "https://www.discobuzz.fr/9942-17567-large_default/lomepal-amina-limited-edition-trifold-triple-lp-vinyl-album-holographic-cover.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "https://www.discobuzz.fr/9942-17567-large_default/lomepal-amina-limited-edition-trifold-triple-lp-vinyl-album-holographic-cover.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "https://www.discobuzz.fr/9942-17567-large_default/lomepal-amina-limited-edition-trifold-triple-lp-vinyl-album-holographic-cover.jpg"));
+        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "../game/assets/images/1.jpg"));
+        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Damso", "../game/assets/images/2.jpg"));
+        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Alpha Wann", "../game/assets/images/3.jpg"));
+        
     }
 }

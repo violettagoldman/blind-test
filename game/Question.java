@@ -1,7 +1,7 @@
 package game;
 
 public class Question {
-    enum Type {
+    public enum Type {
         IMAGE,
         AUDIO,
     }

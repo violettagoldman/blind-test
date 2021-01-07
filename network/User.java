@@ -25,8 +25,8 @@ public class User {
         return this.score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void incrementScore() {
+        this.score++;
     }
 
     public String getName() {

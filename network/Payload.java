@@ -13,6 +13,7 @@ public final class Payload {
         CHANNEL,
         ONGOING,
         QUESTION,
+        CLOSE,
     }
 
     private final Type type;

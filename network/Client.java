@@ -142,17 +142,24 @@ public class Client implements SocketListener, Runnable {
                 String users[] = payload.getProps().get("users").split("\2");
                 String avatars[] = payload.getProps().get("avatars").split("\2");
                 String score[] = payload.getProps().get("score").split("\2");
-                for (int i = 0; i < users.length; i++)
-                    System.out.println(users[i] + " : " + score[i]);
                 if (users != null && users.length != 0)
                     gui.Service.updateUsersConnected(users, score, avatars, this.channel);
                 break;
             case QUESTION:
                 Question question = Quiz.getInstance().get(Integer.parseInt(payload.getProps().get("id")));
-                gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
+                System.out.println(this.channel +  question.getMedia() + question.getQuestion());
+                if (question.getType() == Question.Type.IMAGE)
+                    gui.Service.addImage(this.channel, question.getMedia(), question.getQuestion());
+                else
+                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;
             case ONGOING:
                 String channels[] = payload.getProps().get("blockedChannels").split("\2");
+                System.out.println(payload.toString());
+                break;
+            case CLOSE:
+                // revenir à l'écran avec channels
+                System.out.println("END.");
                 break;
         }
     }
