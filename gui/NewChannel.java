@@ -13,7 +13,7 @@ public class NewChannel extends MyPanel {
         error.setVisible(false);
         this.south.setPreferredSize(new Dimension(400,400));
 
-        this.panel.add(MyButton.createBSaveChannel(cardLayout,cardPanel, title));
+        this.panel.add(MyButton.createBSaveChannel(title));
     }
 
     public void errorVisible() {

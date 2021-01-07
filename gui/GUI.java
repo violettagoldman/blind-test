@@ -8,6 +8,15 @@ public class GUI extends JFrame {
     private static JPanel window;
     private static MyPanel login;
     private static NewChannel newChannel;
+    private static CardLayout cardWindow;
+
+    public static CardLayout getCardWindow() {
+        return cardWindow;
+    }
+
+    public static JPanel getWindow() {
+        return window;
+    }
 
     public GUI() {
         super( "Gorythmic" );
@@ -46,7 +55,7 @@ public class GUI extends JFrame {
 
         //Ajout des éléments à la fenetre
         window = (JPanel) this.getContentPane();
-        final CardLayout cardWindow = new CardLayout();
+        cardWindow = new CardLayout();
         window.setLayout(cardWindow);
 
         //nouveau jeu

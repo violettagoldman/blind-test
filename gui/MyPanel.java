@@ -55,7 +55,7 @@ public class MyPanel extends JPanel {
         newChannel.panel.add(title);
         newChannel.south.setPreferredSize(new Dimension(400,400));
 
-        newChannel.panel.add(MyButton.createBSaveChannel(cardLayout,cardPanel, title));
+        newChannel.panel.add(MyButton.createBSaveChannel(title));
 
         MyScroll scroll = MyScroll.createBlack(newChannel);
         return scroll;
