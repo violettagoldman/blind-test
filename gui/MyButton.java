@@ -100,13 +100,13 @@ public class MyButton extends JButton {
         return send;
     }
 
-    public static MyButton createBNewChannel(CardLayout cardLayout, JPanel cardPanel){
+    public static MyButton createBNewChannel(){
         MyButton bNewChannel = new MyButton("New channel");
         bNewChannel.setPreferredSize(new Dimension(100,20));
         bNewChannel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cardLayout.show(cardPanel, "new channel");
+                GUI.getCardWindow().show(GUI.getWindow(), "new channel");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
@@ -120,7 +120,7 @@ public class MyButton extends JButton {
         bProfile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cardLayout.show(cardPanel, "channels");
+                GUI.getCardWindow().show(GUI.getWindow(), "channels");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
@@ -132,13 +132,14 @@ public class MyButton extends JButton {
         bSignUp.setPreferredSize(new Dimension(100,20));
         bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) { cardLayout.show(cardPanel, "login"); }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                GUI.getCardWindow().show(GUI.getWindow(), "login");}
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return bSignUp;
     }
 
-    public static MyButton createBSaveChannel(CardLayout cardLayout, JPanel cardPanel, JTextField title){
+    public static MyButton createBSaveChannel(JTextField title){
         MyButton bSaveChannel = new MyButton("Create new channel");
         bSaveChannel.setPreferredSize(new Dimension(100,20));
         bSaveChannel.addMouseListener(new java.awt.event.MouseAdapter (){
@@ -147,7 +148,7 @@ public class MyButton extends JButton {
                 Service.addChannel(title.getText(), "user");
                 network.Client.getInstance().sendChannel(title.getText());
                 title.setText("Name of new channel");
-                cardLayout.show(cardPanel, "channels");
+                GUI.getCardWindow().show(GUI.getWindow(), "channels");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
@@ -155,14 +156,14 @@ public class MyButton extends JButton {
     }
 
 
-    public static MyButton createBLogin(CardLayout cardLayout, JPanel cardPanel, JTextField nickname, Login login){ // tu m'envoies pas le bon avatar ici
+    public static MyButton createBLogin(JTextField nickname, Login login){ // tu m'envoies pas le bon avatar ici
         MyButton bLogin = new MyButton("Connect");
         bLogin.setPreferredSize(new Dimension(100,20));
         bLogin.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                network.Client.getInstance().sendConnection(nickname.getText(), login.getAvatar());
-                cardLayout.show(cardPanel, "new channel");}
+                GUI.getCardWindow().show(GUI.getWindow(), "new channel");}
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return bLogin;
@@ -213,6 +214,19 @@ public class MyButton extends JButton {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bGo.setVisible(false);
                 network.Client.getInstance().sendGo();
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) { }
+        });
+        return bGo;
+    }
+
+    public static MyButton createBQuit(){
+        MyButton bGo = new MyButton("Quit");
+        bGo.setPreferredSize(new Dimension(200,30));
+        bGo.addMouseListener(new java.awt.event.MouseAdapter (){
+            public void mouseEntered(java.awt.event.MouseEvent evt) { }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                GUI.getCardWindow().show(GUI.getWindow(), "new channel");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });

@@ -25,4 +25,8 @@ public class Service {
         channelsMap.get(title).updateLisUser(users, scores, avatars);
     }
 
+    public static void errorNewChannel(){
+        GUI.getNewChannel().errorVisible();
+    }
+
 }

@@ -27,6 +27,7 @@ public class ChannelPanel extends JPanel {
     private final JPanel listUser;
     private final HashMap<String, UserPanel> usersMap = new HashMap<>();
     private final  JScrollPane scrollMessages;
+    private final MyButton quit;
 
     public ChannelPanel(String title, String id, String user){
         this.title = title;
@@ -38,6 +39,9 @@ public class ChannelPanel extends JPanel {
         menu.setLayout(new FlowLayout(FlowLayout.LEFT));
         menu.add(MyButton.createBNameChannel(title));
         menu.add(MyButton.createBGo());
+        quit = MyButton.createBQuit();
+        menu.add(quit);
+        quit.setVisible(false);
         menu.setBackground(MyColor.white());
         menu.setPreferredSize(new Dimension(0,40));
         this.add(menu, BorderLayout.NORTH);
@@ -178,5 +182,9 @@ public class ChannelPanel extends JPanel {
 
     public void downVerticalScroll(){
         scrollMessages.getVerticalScrollBar().setValue(scrollMessages.getVerticalScrollBar().getMaximum());
+    }
+
+    public void quitVisible(){
+        quit.setVisible(true);
     }
 }
