@@ -5,20 +5,20 @@ JC = javac
 .java.class:
 		$(JC) $*.java
 
-CLASSES = src/network/*.java \
-		src/gui/*.java
+CLASSES = network/*.java \
+		gui/*.java
 
 all:
 	$(JC) $(CLASSES)
 
 run: all
-	java src.network.Client
+	java network.Client
 
 serv: all
-	java src.network.Server
+	java network.Server
 	
 classes: $(CLASSES:.java=.class)
 
 clean:
-		$(RM) src/network/*.class
-		$(RM) src/gui/*.class
+		$(RM) network/*.class
+		$(RM) gui/*.class

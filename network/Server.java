@@ -52,18 +52,18 @@ public class Server implements Runnable, SocketListener {
         Payload payload = new Payload(Payload.Type.LEADERBOARD);
         String users = "";
         String score = "";
-        System.out.println(activeUsers.size() + " users");
+        String avatars = "";
         for (SocketManager sm : activeUsers.keySet()) {
-            System.out.println("ch: " + activeUsers.get(sm).getChannel());
             if (activeUsers.get(sm) != null &&
                 activeUsers.get(sm).getChannel().equals(channel)) {
-                System.out.println("Here bc");
                 users += activeUsers.get(sm).getName() + "\2";
                 score += activeUsers.get(sm).getScore() + "\2";
+                avatars += activeUsers.get(sm).getAvatar() + "\2";
             }
         }
         payload.addProperty("users", users);  
         payload.addProperty("score", score); 
+        payload.addProperty("avatars", avatars);
         broadcastChannel(payload, channel);
     }
 
@@ -83,7 +83,9 @@ public class Server implements Runnable, SocketListener {
 
     @Override
     public void onMessage(SocketManager sm, Payload payload) {
-        broadcast(payload);
+        if (payload.getType() == Payload.Type.CONNECTION ||
+            payload.getType() == Payload.Type.DISCONNECTION)
+            broadcast(payload);
         System.out.println(payload.toString());
         if (payload.getType() == Payload.Type.CONNECTION) {
             activeUsers.put(sm, new User(payload.getProps().get("user"),
@@ -93,6 +95,10 @@ public class Server implements Runnable, SocketListener {
             System.out.println(activeUsers.get(sm).getName() + " is in " + payload.getProps().get("channel"));
             activeUsers.get(sm).setChannel(payload.getProps().get("channel"));
             broadcastLeaderboard(payload.getProps().get("channel"));
+        }
+        if (payload.getType() == Payload.Type.ANSWER) {
+            // checker la réponse
+           broadcastChannel(payload, activeUsers.get(sm).getChannel());
         }
     }
 }

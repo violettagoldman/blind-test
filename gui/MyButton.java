@@ -57,7 +57,7 @@ public class MyButton extends JButton {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (!write.getText().equals("")) {
                     String str = write.getText();
-                  //  network.Client.getInstance().sendMessage(str, title);
+                   network.Client.getInstance().sendMessage(str, false);
                     write.setText("");
                 }
             }
@@ -74,7 +74,7 @@ public class MyButton extends JButton {
         send.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-               // network.Client.getInstance().sendSmile(smiley, title);
+               network.Client.getInstance().sendMessage(smiley, true);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });

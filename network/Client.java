@@ -58,25 +58,22 @@ public class Client implements SocketListener, Runnable {
         // scanner.close();
     }
 
-    private Payload buildPayloadMessage(String message, boolean isSmile, String channel) {
-        Payload payload = new Payload(Payload.Type.ANSWER);
-        payload.addProperty("message", message);
-        payload.addProperty("user", user);
-        payload.addProperty("smile", isSmile + "");
-        payload.addProperty("channel", channel);
-        return (payload);
-    }
+    // private Payload buildPayloadMessage(String message, boolean isSmile, String channel) {
+    //     Payload payload = new Payload(Payload.Type.ANSWER);
+    //     payload.addProperty("message", message);
+    //     payload.addProperty("user", user);
+    //     payload.addProperty("smile", isSmile + "");
+    //     payload.addProperty("channel", channel);
+    //     return (payload);
+    // }
 
  
 
-    public void sendMessage(String message, String channel) {
-        // String message = messages.take();
-        Payload payload = buildPayloadMessage(message, false, channel);
-        sm.send(payload);
-    }
-
-    public void sendSmile(String smile, String channel) {
-        Payload payload = buildPayloadMessage(smile, true, channel);
+    public void sendMessage(String message, boolean isSmile) {
+        Payload payload = new Payload(Payload.Type.ANSWER);
+        payload.addProperty("message", message);
+        payload.addProperty("user", this.user);
+        payload.addProperty("smile", isSmile + "");
         sm.send(payload);
     }
 
@@ -89,6 +86,8 @@ public class Client implements SocketListener, Runnable {
     }
 
     public void sendConnection(String user, String avatar) {
+        this.user = user;
+        this.avatar = avatar;
         Payload payload = new Payload(Payload.Type.CONNECTION);
         payload.addProperty("user", user);
         payload.addProperty("avatar", avatar);
@@ -123,16 +122,17 @@ public class Client implements SocketListener, Runnable {
                 break;
             case ANSWER:
                 if (payload.getProps().get("smile").equals("true")) {
-                    // pijakogui.Service.addSmiley(payload.getProps().get("message"), payload.getProps().get("user"), payload.getProps().get("channel"));
+                    gui.Service.addSmiley(payload.getProps().get("message"), payload.getProps().get("user"), this.channel);
                 } else {
                     System.out.println(payload.getProps().get("user") + ": " + payload.getProps().get("message"));
-                    // pijakogui.Service.addMessage(payload.getProps().get("message"), payload.getProps().get("user"), payload.getProps().get("channel"));
+                    gui.Service.addMessage(payload.getProps().get("message"), payload.getProps().get("user"), this.channel);
                     payloads.add(payload);
                 }
                 break;
             case LEADERBOARD:
                 System.out.println(payload.toString());
                 String users[] = payload.getProps().get("users").split("\2");
+                String avatars[] = payload.getProps().get("avatars").split("\2");
                 String score[] = payload.getProps().get("score").split("\2");
                 for (int i = 0; i < users.length; i++)
                     System.out.println(users[i] + " : " + score[i]);
