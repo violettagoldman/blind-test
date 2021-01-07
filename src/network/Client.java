@@ -49,9 +49,6 @@ public class Client implements SocketListener, Runnable {
     }
 
     public void run() {
-        this.avatar = "Violetta Avatar";
-        sendConnection();
-        sendChannel("1");
         // Scanner scanner = new Scanner(System.in);
         // while (scanner.hasNextLine()) {
         //     String message = scanner.nextLine();
@@ -70,12 +67,7 @@ public class Client implements SocketListener, Runnable {
         return (payload);
     }
 
-    private Payload buildPayloadConnection() {
-        Payload payload = new Payload(Payload.Type.CONNECTION);
-        payload.addProperty("user", user);
-        payload.addProperty("avatar", avatar);
-        return (payload);
-    }
+ 
 
     public void sendMessage(String message, String channel) {
         // String message = messages.take();
@@ -96,8 +88,10 @@ public class Client implements SocketListener, Runnable {
         sm.send(payload);
     }
 
-    public void sendConnection() {
-        Payload payload = buildPayloadConnection();
+    public void sendConnection(String user, String avatar) {
+        Payload payload = new Payload(Payload.Type.CONNECTION);
+        payload.addProperty("user", user);
+        payload.addProperty("avatar", avatar);
         sm.send(payload);
     }
 
@@ -106,9 +100,8 @@ public class Client implements SocketListener, Runnable {
     // }
 
     public static void main(String[] argv) {
-        // new pijakogui.PijakoWindow().setVisible(true);
+        new src.gui.GUI().setVisible(true);
         Client cl = Client.getInstance();
-        cl.user = argv[0];
         cl.start();
         // cl.sendMessage();
         cl.run();
@@ -143,8 +136,8 @@ public class Client implements SocketListener, Runnable {
                 String score[] = payload.getProps().get("score").split("\2");
                 for (int i = 0; i < users.length; i++)
                     System.out.println(users[i] + " : " + score[i]);
-                // if (users != null && users.length != 0)
-                // pijakogui.Service.updateUsersConnected(users, this.channel);
+                if (users != null && users.length != 0)
+                    src.gui.Service.updateUsersConnected(users, this.channel);
                 break;
         }
     }

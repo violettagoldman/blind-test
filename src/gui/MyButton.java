@@ -147,8 +147,7 @@ public class MyButton extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Service.addChannel(title.getText(), "user");
-                //envoie de channel au serveur
-               // network.Client.getInstance().sendChannel(title.getText());
+                src.network.Client.getInstance().sendChannel(title.getText());
                 title.setText("Name of new channel");
                 cardLayout.show(cardPanel, "channels");
             }
@@ -158,13 +157,13 @@ public class MyButton extends JButton {
     }
 
 
-    public static MyButton createBLogin(CardLayout cardLayout, JPanel cardPanel, JTextField nickname, String avatar){
+    public static MyButton createBLogin(CardLayout cardLayout, JPanel cardPanel, JTextField nickname, String avatar){ // tu m'envoies pas le bon avatar ici
         MyButton bLogin = new MyButton("Connect");
         bLogin.setPreferredSize(new Dimension(100,20));
         bLogin.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-              //  network.Client.getInstance().setUser(nickname.getText());
+               src.network.Client.getInstance().sendConnection(nickname.getText(), avatar);
                 cardLayout.show(cardPanel, "new channel");}
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
@@ -179,7 +178,7 @@ public class MyButton extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cardLayout.show(cardPanel, title);
-                //network.Client.getInstance().sendChannel(title);
+                src.network.Client.getInstance().sendChannel(title);
                  }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });

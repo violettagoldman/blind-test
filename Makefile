@@ -12,10 +12,10 @@ all:
 	$(JC) $(CLASSES)
 
 run: all
-	java network.Client
+	java src.network.Client
 
 serv: all
-	java network.Server
+	java src.network.Server
 	
 classes: $(CLASSES:.java=.class)
 
