@@ -100,7 +100,7 @@ public class Client implements SocketListener, Runnable {
     // }
 
     public static void main(String[] argv) {
-        new src.gui.GUI().setVisible(true);
+        new gui.GUI().setVisible(true);
         Client cl = Client.getInstance();
         cl.start();
         // cl.sendMessage();
@@ -137,7 +137,7 @@ public class Client implements SocketListener, Runnable {
                 for (int i = 0; i < users.length; i++)
                     System.out.println(users[i] + " : " + score[i]);
                 if (users != null && users.length != 0)
-                    src.gui.Service.updateUsersConnected(users, this.channel);
+                    gui.Service.updateUsersConnected(users, this.channel);
                 break;
         }
     }
