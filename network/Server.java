@@ -82,7 +82,7 @@ public class Server implements Runnable, SocketListener {
     public void chooseQuestion(String channel) {
         timers.put(channel, new Timer());
         timers.get(channel).schedule(new Task(channel), SECONDSTIMEOUT * 1000);
-        questions.put(channel, game.Quiz.getInstance().randomQuestionId());
+        questions.put(channel, game.Quiz.getInstance().randomQuestionId(channel));
         Payload payload = new Payload(Payload.Type.QUESTION);
         payload.addProperty("id", questions.get(channel) + "");
         broadcastChannel(payload, channel);
