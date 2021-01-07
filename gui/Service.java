@@ -21,6 +21,14 @@ public class Service {
         channelsMap.get(title).smiley(smiley, user, avatar);
     }
 
+    public static void addImage(String title, String image, String text){
+        channelsMap.get(title).image(image, text);
+    }
+
+    public static void addMusic(String title, String music, String text){
+        channelsMap.get(title).music(music, text);
+    }
+
     public static void updateUsersConnected( String [] users, String [] scores, String [] avatars,  String title){
         channelsMap.get(title).updateLisUser(users, scores, avatars);
     }

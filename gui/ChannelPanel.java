@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.File;
 
 public class ChannelPanel extends JPanel {
     private final String title;
@@ -61,8 +62,7 @@ public class ChannelPanel extends JPanel {
         messagesZone = new JPanel();
         messagesZone.setLayout(new BoxLayout(messagesZone, BoxLayout.PAGE_AXIS));
         messagesZone.setBackground(MyColor.white());
-        messagesZone.add(new MyTextArea("\n\n Welcome to the blind_test : \n\n**************************************\n\n "
-                +title+
+        messagesZone.add(new MyTextArea("\n\n Welcome to the blind_test \n\n**************************************\n\n "+
                 " \n\n**************************************\n\n Send news messages !! "+
                 "\n\n**************************************\n\n See the other users at left \n\n"
         ));
@@ -87,6 +87,9 @@ public class ChannelPanel extends JPanel {
         write.add(MyButton.createBSend(writeScript, messagesZone, title), BorderLayout.EAST );
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
+
+        this.image("go.png", "find the name of this pokemon !!");
+        this.music("test", "give the name of this music");
     }
 
     public JPanel messagesStructure(String nickname, String avatar){
@@ -162,6 +165,40 @@ public class ChannelPanel extends JPanel {
         downVerticalScroll();
     }
 
+    public void image(String image, String text){
+        JPanel messageStruct = messagesStructure(text, "imageQuestion.png");
+        ImageIcon imageIcon = new ImageIcon( MyButton.class.getResource(image));
+        ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+        JLabel jlabel = new JLabel(imageIcon2);
+        jlabel.setPreferredSize(new Dimension(300,300));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(jlabel, BorderLayout.WEST);
+        panel.setBackground(MyColor.gray());
+        messageStruct.add(panel, BorderLayout.CENTER);
+        messagesZone.add(messageStruct);
+
+        JPanel south = new JPanel();
+        south.setPreferredSize(new Dimension(0,30));
+        south.setBackground(MyColor.gray());
+        messageStruct.add(south, BorderLayout.SOUTH);
+
+        messagesZone.validate();
+        scrollMessages.validate();
+        downVerticalScroll();
+    }
+
+    public void music(String music, String text){
+        JPanel messageStruct = messagesStructure(text, "musicQuestion.png");
+
+        //jouer le morceau de musique
+
+        messagesZone.add(messageStruct);
+        messagesZone.validate();
+        scrollMessages.validate();
+        downVerticalScroll();
+    }
+
     public void updateLisUser(String [] users, String [] scores, String [] avatars){
         for (Map.Entry mapentry : usersMap.entrySet()) {
              listUser.remove((Component) mapentry.getValue());
@@ -187,4 +224,5 @@ public class ChannelPanel extends JPanel {
     public void quitVisible(){
         quit.setVisible(true);
     }
+
 }
