@@ -10,7 +10,6 @@ public class GUI extends JFrame {
     private static MyPanel signUp;
     private static MyPanel login;
 
-
     public GUI() {
         super( "Gorythmic" );
 
