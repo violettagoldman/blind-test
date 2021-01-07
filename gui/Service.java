@@ -36,5 +36,4 @@ public class Service {
     public static void errorNewChannel(){
         GUI.getNewChannel().errorVisible();
     }
-
 }

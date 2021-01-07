@@ -213,6 +213,7 @@ public class MyButton extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bGo.setVisible(false);
+                network.Client.getInstance().sendGo();
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
