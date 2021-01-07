@@ -138,8 +138,6 @@ public class MyButton extends JButton {
         return bSignUp;
     }
 
-
-
     public static MyButton createBSaveChannel(CardLayout cardLayout, JPanel cardPanel, JTextField title){
         MyButton bSaveChannel = new MyButton("Create new channel");
         bSaveChannel.setPreferredSize(new Dimension(100,20));
@@ -184,34 +182,6 @@ public class MyButton extends JButton {
         return bNameChannel;
     }
 
-
-    public static MyButton createBDeleteMessage(JPanel messagesZone, JPanel message){
-        MyButton bDeleteMessage = new MyButton("X");
-        bDeleteMessage.setPreferredSize(new Dimension(17,17));
-        bDeleteMessage.addMouseListener(new java.awt.event.MouseAdapter (){
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                messagesZone.remove(message);
-                messagesZone.remove(bDeleteMessage);
-                messagesZone.validate();
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bDeleteMessage;
-    }
-
-
-    public static MyButton createBNameUser(String name){
-        MyButton bNameUser = new MyButton(name);
-        bNameUser.setPreferredSize(new Dimension(100,30));
-        bNameUser.addMouseListener(new java.awt.event.MouseAdapter (){
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) { }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bNameUser;
-    }
-
     public static MyButton createBChooseAvatar(String avatar, JPanel north, Login login){
         ImageIcon image = new ImageIcon( MyButton.class.getResource(avatar));
         ImageIcon image2 = new ImageIcon(image.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
@@ -233,6 +203,19 @@ public class MyButton extends JButton {
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return chooseAvatar;
+    }
+
+    public static MyButton createBGo(){
+        MyButton bGo = new MyButton("GO");
+        bGo.setPreferredSize(new Dimension(200,30));
+        bGo.addMouseListener(new java.awt.event.MouseAdapter (){
+            public void mouseEntered(java.awt.event.MouseEvent evt) { }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                bGo.setVisible(false);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) { }
+        });
+        return bGo;
     }
 
 

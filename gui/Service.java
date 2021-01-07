@@ -21,22 +21,6 @@ public class Service {
         channelsMap.get(title).smiley(smiley, user, avatar);
     }
 
-
-    public static void addUser( String nickname, String title){
-        MyButton button = MyButton.createBNameUser(nickname);
-        channelsMap.get(title).connected(nickname);
-        // channelsMap.get(title).getUsersMap().put(nickname, button);
-        channelsMap.get(title).getListUser().add(button);
-        channelsMap.get(title).validate();
-    }
-
-    public static void removeUser( String nickname, String title){
-        ChannelPanel channel = channelsMap.get(title);
-        channel.getListUser().remove(channel.getUsersMap().get(nickname));
-        channel.getUsersMap().remove(nickname);
-        channelsMap.get(title).validate();
-    }
-
     public static void updateUsersConnected( String [] users, String [] scores, String [] avatars,  String title){
         channelsMap.get(title).updateLisUser(users, scores, avatars);
     }

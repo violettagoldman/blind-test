@@ -37,6 +37,7 @@ public class ChannelPanel extends JPanel {
         JPanel menu = new JPanel();
         menu.setLayout(new FlowLayout(FlowLayout.LEFT));
         menu.add(MyButton.createBNameChannel(title));
+        menu.add(MyButton.createBGo());
         menu.setBackground(MyColor.white());
         menu.setPreferredSize(new Dimension(0,40));
         this.add(menu, BorderLayout.NORTH);
@@ -56,10 +57,10 @@ public class ChannelPanel extends JPanel {
         messagesZone = new JPanel();
         messagesZone.setLayout(new BoxLayout(messagesZone, BoxLayout.PAGE_AXIS));
         messagesZone.setBackground(MyColor.white());
-        messagesZone.add(new MyTextArea("\n\n Channel of "+user+": \n\n**************************************\n\n "
+        messagesZone.add(new MyTextArea("\n\n Welcome to the blind_test : \n\n**************************************\n\n "
                 +title+
                 " \n\n**************************************\n\n Send news messages !! "+
-                "\n\n**************************************\n\n See the other users at right ->\n\n"
+                "\n\n**************************************\n\n See the other users at left \n\n"
         ));
         containerMessage.add(messagesZone, BorderLayout.CENTER);
         JPanel smiley = new Smiley(messagesZone,title );
@@ -117,14 +118,6 @@ public class ChannelPanel extends JPanel {
         north.setPreferredSize(new Dimension(0, 50));
         panel.add(north, BorderLayout.NORTH);
 
-        //zone de suppression message
-        JPanel zoneButton = new JPanel();
-        zoneButton.setPreferredSize(new Dimension(17,0));
-        JButton bDeleteMessages = MyButton.createBDeleteMessage(messagesZone, panel);
-        zoneButton.add(bDeleteMessages);
-        zoneButton.setBackground(MyColor.gray());
-        panel.add(zoneButton, BorderLayout.WEST);
-
         panel.setBackground(MyColor.gray());
         panel.setBorder(new EmptyBorder(2, 10, 0, 0));
 
@@ -140,12 +133,6 @@ public class ChannelPanel extends JPanel {
         messagesZone.validate();
         scrollMessages.validate();
         downVerticalScroll();
-    }
-
-    public void connected(String user){
-        JTextArea connected = new MyTextArea(user+" connected");
-        connected.setForeground(MyColor.green());
-        messagesZone.add(connected);
     }
 
     public void smiley(String smiley, String nickname, String avatar){
@@ -183,7 +170,6 @@ public class ChannelPanel extends JPanel {
             System.out.println(users[i]+ scores[i]+ avatars[i]);
             usersMap.put(users[i], userPanel);
             listUser.add(userPanel);
-            //messagesZone.add(userPanel);
             listUser.validate();
         }
         this.listUser.validate();
