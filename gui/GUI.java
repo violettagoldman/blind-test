@@ -6,9 +6,8 @@ import java.awt.event.WindowAdapter;
 // Classe principale de l'interface
 public class GUI extends JFrame {
     private static JPanel window;
-    private static MyPanel profile;
-    private static MyPanel signUp;
     private static MyPanel login;
+    private static NewChannel newChannel;
 
     public GUI() {
         super( "Gorythmic" );
@@ -51,7 +50,8 @@ public class GUI extends JFrame {
         window.setLayout(cardWindow);
 
         //nouveau jeu
-        window.add(MyPanel.newChannel(cardWindow, window), "new channel");
+        newChannel = new NewChannel(cardWindow, window);
+        window.add(MyScroll.createBlack(newChannel), "new channel");
 
         //connection
         login = new Login(cardWindow , window);
@@ -64,7 +64,7 @@ public class GUI extends JFrame {
 
     }
 
-    public static MyPanel getProfile() {
-        return profile;
+    public static NewChannel getNewChannel() {
+        return newChannel;
     }
 }
