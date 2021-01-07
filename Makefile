@@ -6,7 +6,8 @@ JC = javac
 		$(JC) $*.java
 
 CLASSES = network/*.java \
-		gui/*.java
+		gui/*.java \
+		game/*.java
 
 all:
 	$(JC) $(CLASSES)
@@ -22,3 +23,4 @@ classes: $(CLASSES:.java=.class)
 clean:
 		$(RM) network/*.class
 		$(RM) gui/*.class
+		$(RM) game/*.class

@@ -85,6 +85,17 @@ public class Server implements Runnable, SocketListener {
         broadcastChannel(payload, channel);
     }
 
+    public void sendOngoing(SocketManager sm) { // blocked channels
+        Payload payload = new Payload(Payload.Type.ONGOING);
+        String channels = "";
+        for (String channel : questions.keySet()) {
+            if (questions.get(channel) != -1)
+                channels += channel + "\2";
+        }
+        payload.addProperty("blockedChannels", channels);
+        sm.send(payload);
+    }
+
     public static void main(String[] argv) {
         Server server = new Server();
         server.run();
@@ -108,6 +119,7 @@ public class Server implements Runnable, SocketListener {
         if (payload.getType() == Payload.Type.CONNECTION) {
             activeUsers.put(sm, new User(payload.getProps().get("user"),
                 payload.getProps().get("avatar")));
+            sendOngoing(sm);
         }
         if (payload.getType() == Payload.Type.CHANNEL && activeUsers.get(sm) != null) {
             System.out.println(activeUsers.get(sm).getName() + " is in " + payload.getProps().get("channel"));

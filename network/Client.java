@@ -151,6 +151,9 @@ public class Client implements SocketListener, Runnable {
                 Question question = Quiz.getInstance().get(Integer.parseInt(payload.getProps().get("id")));
                 gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;
+            case ONGOING:
+                String channels[] = payload.getProps().get("blockedChannels").split("\2");
+                break;
         }
     }
 }
