@@ -45,6 +45,7 @@ public class ChannelPanel extends JPanel {
         listUser = new JPanel();
         listUser.setPreferredSize(new Dimension(200,0));
         listUser.setBackground(MyColor.grayGreen());
+        listUser.setLayout(new FlowLayout(FlowLayout.CENTER));
         listUser.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 2,MyColor.green()));
         this.add(listUser , BorderLayout.WEST );
 
@@ -83,7 +84,7 @@ public class ChannelPanel extends JPanel {
         this.add(write, BorderLayout.SOUTH );
     }
 
-    public JPanel messagesStructure(String nickname){
+    public JPanel messagesStructure(String nickname, String avatar){
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
@@ -96,7 +97,7 @@ public class ChannelPanel extends JPanel {
         JTextArea user = MyTextArea.user(nickname+" :");
         user.setForeground(MyColor.green());
         user.setPreferredSize(new Dimension(0,25));
-        ImageIcon image = new ImageIcon( MyButton.class.getResource("avatar/0.png"));
+        ImageIcon image = new ImageIcon( MyButton.class.getResource(avatar));
         ImageIcon image2 = new ImageIcon(image.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
         JLabel jlabel = new JLabel(image2);
         userPlace.add(jlabel, BorderLayout.WEST);
@@ -130,8 +131,8 @@ public class ChannelPanel extends JPanel {
         return panel;
     }
 
-    public void messages(String str, String nickname){
-        JPanel messageStruct = messagesStructure(nickname);
+    public void messages(String str, String nickname, String avatar){
+        JPanel messageStruct = messagesStructure(nickname, avatar);
         JTextArea message = MyTextArea.message(str);
         message.setForeground(MyColor.black());
         messageStruct.add(message, BorderLayout.CENTER);
@@ -147,8 +148,8 @@ public class ChannelPanel extends JPanel {
         messagesZone.add(connected);
     }
 
-    public void smiley(String smiley, String nickname){
-        JPanel messageStruct = messagesStructure(nickname);
+    public void smiley(String smiley, String nickname, String avatar){
+        JPanel messageStruct = messagesStructure(nickname, avatar);
         ImageIcon image = new ImageIcon( MyButton.class.getResource(smiley));
         ImageIcon image2 = new ImageIcon(image.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
         JLabel jlabel = new JLabel(image2);
@@ -179,8 +180,11 @@ public class ChannelPanel extends JPanel {
         usersMap.clear();
         for (int i = 0 ; i<users.length ; i++) {
             UserPanel userPanel = new UserPanel(users[i], scores[i], avatars[i]);
+            System.out.println(users[i]+ scores[i]+ avatars[i]);
             usersMap.put(users[i], userPanel);
             listUser.add(userPanel);
+            //messagesZone.add(userPanel);
+            listUser.validate();
         }
         this.listUser.validate();
         this.validate();

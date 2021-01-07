@@ -10,15 +10,15 @@ public class Service {
         channelsMap.put(title, ChannelsPanel.addChannels(title, user));
     }
 
-    public static void addMessage(String message, String user, String title){
+    public static void addMessage(String message, String user, String title, String avatar){
         System.out.println(title);
         System.out.println(channelsMap.keySet());
-        channelsMap.get(title).messages(message, user);
+        channelsMap.get(title).messages(message, user, avatar);
         channelsMap.get(title).getMessagesZone().validate();
     }
 
-    public static void addSmiley(String smiley, String user, String title){
-        channelsMap.get(title).smiley(smiley, user);
+    public static void addSmiley(String smiley, String user, String title, String avatar){
+        channelsMap.get(title).smiley(smiley, user, avatar);
     }
 
 
