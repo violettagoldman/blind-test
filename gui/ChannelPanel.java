@@ -21,12 +21,9 @@ public class ChannelPanel extends JPanel {
 
     public JPanel getListUser() {return listUser; }
 
-    public HashMap<String, UserPanel> getUsersMap() {return usersMap; }
-
     private final String id;
     private final JPanel messagesZone;
     private final JPanel listUser;
-    private final HashMap<String, UserPanel> usersMap = new HashMap<>();
     private final  JScrollPane scrollMessages;
     private final MyButton quit;
 
@@ -84,7 +81,7 @@ public class ChannelPanel extends JPanel {
         writeScript.setBackground(MyColor.white());
         writeScript.setFont(new Font("SansSerif", Font.PLAIN, 15));
         writeScript.setForeground(MyColor.black());
-        write.add(MyButton.createBSend(writeScript, messagesZone, title), BorderLayout.EAST );
+        write.add(MyButton.createBSend(writeScript), BorderLayout.EAST );
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
 
@@ -200,16 +197,10 @@ public class ChannelPanel extends JPanel {
     }
 
     public void updateLisUser(String [] users, String [] scores, String [] avatars){
-        for (Map.Entry mapentry : usersMap.entrySet()) {
-             listUser.remove((Component) mapentry.getValue());
-             System.out.println(mapentry.getKey());
-             this.validate();
-        }
-        usersMap.clear();
+        listUser.removeAll();
+        listUser.validate();
         for (int i = 0 ; i<users.length ; i++) {
             UserPanel userPanel = new UserPanel(users[i], scores[i], avatars[i]);
-            System.out.println(users[i]+ scores[i]+ avatars[i]);
-            usersMap.put(users[i], userPanel);
             listUser.add(userPanel);
             listUser.validate();
         }
