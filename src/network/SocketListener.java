@@ -1,4 +1,4 @@
-package network;
+package src.network;
 
 public interface SocketListener {
     void onDisconnection(SocketManager sm);

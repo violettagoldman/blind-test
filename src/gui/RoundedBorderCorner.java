@@ -1,4 +1,4 @@
-package gui;
+package src.gui;
 
 import javax.swing.border.AbstractBorder;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package network;
+package src.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,11 +12,11 @@ import java.util.concurrent.Executors;
 public class Server implements Runnable, SocketListener {
     private final List<SocketManager> sockets;
     private final ExecutorService pool;
-    private final Map<SocketManager, network.User> activeUsers;
+    private final Map<SocketManager, User> activeUsers;
 
     public Server() {
         sockets = new ArrayList<SocketManager>();
-        activeUsers = new HashMap<SocketManager, network.User>();
+        activeUsers = new HashMap<SocketManager, User>();
         this.pool = Executors.newCachedThreadPool();
     }
 
@@ -86,7 +86,7 @@ public class Server implements Runnable, SocketListener {
         broadcast(payload);
         System.out.println(payload.toString());
         if (payload.getType() == Payload.Type.CONNECTION) {
-            activeUsers.put(sm, new network.User(payload.getProps().get("user"),
+            activeUsers.put(sm, new User(payload.getProps().get("user"),
                 payload.getProps().get("avatar")));
         }
         if (payload.getType() == Payload.Type.CHANNEL && activeUsers.get(sm) != null) {

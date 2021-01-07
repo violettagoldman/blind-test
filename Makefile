@@ -5,8 +5,8 @@ JC = javac
 .java.class:
 		$(JC) $*.java
 
-CLASSES = network/*.java
-		# src/pijakogui/*.java
+CLASSES = src/network/*.java \
+		src/gui/*.java
 
 all:
 	$(JC) $(CLASSES)
@@ -20,5 +20,5 @@ serv: all
 classes: $(CLASSES:.java=.class)
 
 clean:
-		$(RM) network/*.class
-		# $(RM) src/pijakogui/*.class
+		$(RM) src/network/*.class
+		$(RM) src/gui/*.class

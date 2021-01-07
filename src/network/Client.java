@@ -1,11 +1,11 @@
-package network;
+package src.network;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import network.Payload.Type;
+import src.network.Payload.Type;
 
 public class Client implements SocketListener, Runnable {
     private SocketManager sm;
