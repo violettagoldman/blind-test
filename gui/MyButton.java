@@ -50,7 +50,7 @@ public class MyButton extends JButton {
     }
 
 
-    public static MyButton createBSend(JTextArea write, JPanel messagesZone, String title){
+    public static MyButton createBSend(JTextArea write){
         MyButton send = new MyButton("Send");
         send.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
