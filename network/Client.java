@@ -123,12 +123,10 @@ public class Client implements SocketListener, Runnable {
                 break;
             case ANSWER:
                 if (payload.getProps().get("smile").equals("true")) {
-                    // gui.Service.addSmiley(payload.getProps().get("message"), payload.getProps().get("user"), this.channel, payload.getProps().get("avatar"));
-                    gui.Service.addSmiley(payload.getProps().get("message"), payload.getProps().get("user"), this.channel);
+                    gui.Service.addSmiley(payload.getProps().get("message"), payload.getProps().get("user"), this.channel, payload.getProps().get("avatar"));
                 } else {
                     System.out.println(payload.getProps().get("user") + ": " + payload.getProps().get("message"));
-                    // gui.Service.addMessage(payload.getProps().get("message"), payload.getProps().get("user"), this.channel, payload.getProps().get("avatar"));
-                    gui.Service.addMessage(payload.getProps().get("message"), payload.getProps().get("user"), this.channel);
+                    gui.Service.addMessage(payload.getProps().get("message"), payload.getProps().get("user"), this.channel, payload.getProps().get("avatar"));
                     payloads.add(payload);
                 }
                 break;
