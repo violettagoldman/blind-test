@@ -137,7 +137,7 @@ public class Client implements SocketListener, Runnable {
                 for (int i = 0; i < users.length; i++)
                     System.out.println(users[i] + " : " + score[i]);
                 if (users != null && users.length != 0)
-                    gui.Service.updateUsersConnected(users, this.channel);
+                    gui.Service.updateUsersConnected(users, score, avatars, this.channel);
                 break;
         }
     }

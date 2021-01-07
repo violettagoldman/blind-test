@@ -25,7 +25,7 @@ public class Service {
     public static void addUser( String nickname, String title){
         MyButton button = MyButton.createBNameUser(nickname);
         channelsMap.get(title).connected(nickname);
-        channelsMap.get(title).getUsersMap().put(nickname, button);
+        // channelsMap.get(title).getUsersMap().put(nickname, button);
         channelsMap.get(title).getListUser().add(button);
         channelsMap.get(title).validate();
     }
