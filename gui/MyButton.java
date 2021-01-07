@@ -157,33 +157,19 @@ public class MyButton extends JButton {
     }
 
 
-    public static MyButton createBLogin(CardLayout cardLayout, JPanel cardPanel, JTextField nickname, String avatar){ // tu m'envoies pas le bon avatar ici
+    public static MyButton createBLogin(CardLayout cardLayout, JPanel cardPanel, JTextField nickname, Login login){ // tu m'envoies pas le bon avatar ici
         MyButton bLogin = new MyButton("Connect");
         bLogin.setPreferredSize(new Dimension(100,20));
         bLogin.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-               network.Client.getInstance().sendConnection(nickname.getText(), avatar);
+               network.Client.getInstance().sendConnection(nickname.getText(), login.getAvatar());
                 cardLayout.show(cardPanel, "new channel");}
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return bLogin;
     }
 
-
-    public static MyButton createBGoChannel( CardLayout cardLayout, JPanel cardPanel , String title){
-        MyButton bGoToChannel = new MyButton(title);
-        bGoToChannel.setPreferredSize(new Dimension(200,50));
-        bGoToChannel.addMouseListener(new java.awt.event.MouseAdapter (){
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cardLayout.show(cardPanel, title);
-                network.Client.getInstance().sendChannel(title);
-                 }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bGoToChannel;
-    }
 
     public static MyButton createBNameChannel( String title){
         MyButton bNameChannel = new MyButton(title);
@@ -212,21 +198,6 @@ public class MyButton extends JButton {
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return bDeleteMessage;
-    }
-
-    public static MyButton createBAddUser(JTextField addUser, JPanel listUser){
-        MyButton bAddUser = new MyButton("Add user");
-        bAddUser.setPreferredSize(new Dimension(100,30));
-        bAddUser.addMouseListener(new java.awt.event.MouseAdapter (){
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                listUser.add(MyButton.createBNameUser(addUser.getText()));
-                addUser.setText("add user in this channel");
-                listUser.validate();
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bAddUser;
     }
 
 

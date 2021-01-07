@@ -37,8 +37,8 @@ public class Service {
         channelsMap.get(title).validate();
     }
 
-    public static void updateUsersConnected( String [] users, String title){
-        channelsMap.get(title).updateLisUser(users);
+    public static void updateUsersConnected( String [] users, String [] scores, String [] avatars,  String title){
+        channelsMap.get(title).updateLisUser(users, scores, avatars);
     }
 
 }

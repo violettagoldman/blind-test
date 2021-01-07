@@ -20,12 +20,12 @@ public class ChannelPanel extends JPanel {
 
     public JPanel getListUser() {return listUser; }
 
-    public HashMap<String, MyButton> getUsersMap() {return usersMap; }
+    public HashMap<String, UserPanel> getUsersMap() {return usersMap; }
 
     private final String id;
     private final JPanel messagesZone;
     private final JPanel listUser;
-    private final HashMap<String, MyButton> usersMap = new HashMap<>();
+    private final HashMap<String, UserPanel> usersMap = new HashMap<>();
     private final  JScrollPane scrollMessages;
 
     public ChannelPanel(String title, String id, String user){
@@ -170,17 +170,17 @@ public class ChannelPanel extends JPanel {
         downVerticalScroll();
     }
 
-    public void updateLisUser(String [] users){
+    public void updateLisUser(String [] users, String [] scores, String [] avatars){
         for (Map.Entry mapentry : usersMap.entrySet()) {
              listUser.remove((Component) mapentry.getValue());
              System.out.println(mapentry.getKey());
              this.validate();
         }
         usersMap.clear();
-        for (String user : users) {
-            MyButton button = MyButton.createBNameUser(user);
-            usersMap.put(user, button);
-            listUser.add(button);
+        for (int i = 0 ; i<users.length ; i++) {
+            UserPanel userPanel = new UserPanel(users[i], scores[i], avatars[i]);
+            usersMap.put(users[i], userPanel);
+            listUser.add(userPanel);
         }
         this.listUser.validate();
         this.validate();

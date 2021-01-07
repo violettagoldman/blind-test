@@ -16,7 +16,7 @@ public class Login extends MyPanel{
         north.setLayout(new FlowLayout(FlowLayout.CENTER));
         north.setBackground(MyColor.white());
         north.add(nickname);
-        north.add(MyButton.createBLogin(cardLayout, cardPanel, nickname, this.avatar), BorderLayout.SOUTH);
+        north.add(MyButton.createBLogin(cardLayout, cardPanel, nickname, this), BorderLayout.SOUTH);
 
         this.panel.add(north, BorderLayout.NORTH);
 
@@ -38,5 +38,9 @@ public class Login extends MyPanel{
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 }
