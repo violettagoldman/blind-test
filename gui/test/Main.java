@@ -1,4 +1,4 @@
-package src.gui.test;
+package gui.test;
 
 
     import java.awt.FlowLayout;
