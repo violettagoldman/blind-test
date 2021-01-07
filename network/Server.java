@@ -13,11 +13,13 @@ public class Server implements Runnable, SocketListener {
     private final List<SocketManager> sockets;
     private final ExecutorService pool;
     private final Map<SocketManager, User> activeUsers;
+    private final Map<String, Integer> questions;
 
     public Server() {
-        sockets = new ArrayList<SocketManager>();
-        activeUsers = new HashMap<SocketManager, User>();
+        this.sockets = new ArrayList<SocketManager>();
+        this.activeUsers = new HashMap<SocketManager, User>();
         this.pool = Executors.newCachedThreadPool();
+        this.questions = new HashMap<String, Integer>();
     }
 
     public void run() {
@@ -67,6 +69,22 @@ public class Server implements Runnable, SocketListener {
         broadcastChannel(payload, channel);
     }
 
+    public void chooseQuestion(String channel) {
+        questions.put(channel, game.Quiz.getInstance().randomQuestionId());
+        Payload payload = new Payload(Payload.Type.QUESTION);
+        payload.addProperty("id", questions.get(channel) + "");
+        broadcastChannel(payload, channel);
+    }
+
+    public void sendMessage(String message, String channel) {
+        Payload payload = new Payload(Payload.Type.ANSWER);
+        payload.addProperty("message", message);
+        payload.addProperty("user", "BOT");
+        payload.addProperty("smile", false + "");
+        payload.addProperty("avatar", "avatar/2.png");
+        broadcastChannel(payload, channel);
+    }
+
     public static void main(String[] argv) {
         Server server = new Server();
         server.run();
@@ -94,11 +112,25 @@ public class Server implements Runnable, SocketListener {
         if (payload.getType() == Payload.Type.CHANNEL && activeUsers.get(sm) != null) {
             System.out.println(activeUsers.get(sm).getName() + " is in " + payload.getProps().get("channel"));
             activeUsers.get(sm).setChannel(payload.getProps().get("channel"));
+            questions.put(payload.getProps().get("channel"), -1);
             broadcastLeaderboard(payload.getProps().get("channel"));
         }
         if (payload.getType() == Payload.Type.ANSWER) {
             // checker la réponse
-           broadcastChannel(payload, activeUsers.get(sm).getChannel());
+            broadcastChannel(payload, activeUsers.get(sm).getChannel());
+            if (questions.get(activeUsers.get(sm).getChannel()) != -1) // check if the game has started
+            {
+                if (payload.getProps().get("message").length() == 2) {
+                    sendMessage(activeUsers.get(sm).getName() + " has the answer!", activeUsers.get(sm).getChannel());
+                    chooseQuestion(activeUsers.get(sm).getChannel());
+                }
+                else
+                    sendMessage(activeUsers.get(sm).getName() + " try again!", activeUsers.get(sm).getChannel());
+            }
+            
+        }
+        if (payload.getType() == Payload.Type.ONGOING) {
+            chooseQuestion(activeUsers.get(sm).getChannel());
         }
     }
 }

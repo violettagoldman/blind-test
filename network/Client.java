@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import game.Question;
+import game.Quiz;
 import network.Payload.Type;
 
 public class Client implements SocketListener, Runnable {
@@ -86,6 +88,11 @@ public class Client implements SocketListener, Runnable {
         sm.send(payload);
     }
 
+    public void sendGo() {
+        Payload payload = new Payload(Payload.Type.ONGOING);
+        sm.send(payload);
+    }
+
     public void sendConnection(String user, String avatar) {
         this.user = user;
         this.avatar = avatar;
@@ -139,6 +146,10 @@ public class Client implements SocketListener, Runnable {
                     System.out.println(users[i] + " : " + score[i]);
                 if (users != null && users.length != 0)
                     gui.Service.updateUsersConnected(users, score, avatars, this.channel);
+                break;
+            case QUESTION:
+                Question question = Quiz.getInstance().get(Integer.parseInt(payload.getProps().get("id")));
+                gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;
         }
     }

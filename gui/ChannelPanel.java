@@ -60,7 +60,7 @@ public class ChannelPanel extends JPanel {
         messagesZone.add(new MyTextArea("\n\n Welcome to the blind_test : \n\n**************************************\n\n "
                 +title+
                 " \n\n**************************************\n\n Send news messages !! "+
-                "\n\n**************************************\n\n See the other users at left \n\n"
+                "\n\n**************************************\n\n See the other users on the left \n\n"
         ));
         containerMessage.add(messagesZone, BorderLayout.CENTER);
         JPanel smiley = new Smiley(messagesZone,title );
