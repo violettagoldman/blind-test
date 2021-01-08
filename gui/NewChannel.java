@@ -29,6 +29,8 @@ public class NewChannel extends MyPanel {
         network.Client.getInstance().sendChannel(title.getText());
         System.out.println(title.getText());
         title.setText("Name of new channel");
+        error.setVisible(false);
+        this.validate();
         GUI.getCardWindow().show(GUI.getWindow(), "channels");
     }
 }
