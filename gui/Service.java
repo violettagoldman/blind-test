@@ -42,6 +42,6 @@ public class Service {
     }
 
     public static void endGame(String title){
-        channelsMap.get(title).goNotVisible();
+        channelsMap.get(title).quitVisible();
     }
 }
