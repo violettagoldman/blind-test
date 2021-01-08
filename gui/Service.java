@@ -34,7 +34,7 @@ public class Service {
     }
 
     public static void errorNewChannel(String [] channels){
-        GUI.getNewChannel().errorVisible(channels);
+       // GUI.getNewChannel().errorVisible(channels);
     }
 
     public static void startGame(String title){
