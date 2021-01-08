@@ -44,4 +44,9 @@ public class Service {
     public static void endGame(String title){
         channelsMap.get(title).quitVisible();
     }
+
+    public static void returnNewChanel(){
+        GUI.getCardWindow().show(GUI.getWindow(), "new channel");
+    }
+
 }
