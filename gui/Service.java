@@ -45,8 +45,9 @@ public class Service {
         channelsMap.get(title).quitVisible();
     }
 
-    public static void returnNewChanel(){
+    public static void returnNewChanel(String title){
         GUI.getCardWindow().show(GUI.getWindow(), "new channel");
+        GUI.getCardWindow().removeLayoutComponent(channelsMap.get(title));
     }
 
 }
