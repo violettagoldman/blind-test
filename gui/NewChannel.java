@@ -17,16 +17,17 @@ public class NewChannel extends MyPanel {
         this.panel.add(MyButton.createBSaveChannel(title));
     }
 
-    public void errorVisible(String [] channels) {
+    public void errorVisible() {
+        String channels[] = network.Client.getInstance().getBlockedChannels();
         for(String channel : channels){
             if(channel.equals(title.getText())){
                 error.setVisible(true);
                 return;
             }
         }
+        Service.addChannel(title.getText(), "user");
         network.Client.getInstance().sendChannel(title.getText());
         System.out.println(title.getText());
-        Service.addChannel(title.getText(), "user");
         title.setText("Name of new channel");
         GUI.getCardWindow().show(GUI.getWindow(), "channels");
     }

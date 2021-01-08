@@ -33,8 +33,8 @@ public class Service {
         channelsMap.get(title).updateLisUser(users, scores, avatars);
     }
 
-    public static void errorNewChannel(String [] channels){
-       // GUI.getNewChannel().errorVisible(channels);
+    public static void errorNewChannel(){
+       GUI.getNewChannel().errorVisible();
     }
 
     public static void startGame(String title){

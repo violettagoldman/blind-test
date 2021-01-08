@@ -148,6 +148,7 @@ public class Server implements Runnable, SocketListener {
     public void endGame(String channel, User u) {
         String msg = u.getName() + " has won! You have one minute to leave the room. See you!";
         sendMessage(msg, channel);
+        questions.put(channel, -1);
         timers.get(channel).cancel();
         timers.put(channel, new Timer());
         timers.get(channel).schedule(new CloseTask(channel), SECONDSCLOSE * 1000);

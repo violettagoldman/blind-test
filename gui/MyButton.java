@@ -104,7 +104,7 @@ public class MyButton extends JButton {
         bSaveChannel.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                //network.Client.getInstance().sendBlockedChannels();
+                gui.Service.errorNewChannel();
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });

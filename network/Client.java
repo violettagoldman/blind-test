@@ -15,6 +15,7 @@ public class Client implements SocketListener, Runnable {
     private String user;
     private String avatar;
     private Thread thread;
+    private String[] blockedChannels;
     
     // private LinkedBlockingQueue<String> messages = new LinkedBlockingQueue<>();
     private LinkedBlockingQueue<Payload> payloads = new LinkedBlockingQueue<>();
@@ -47,10 +48,10 @@ public class Client implements SocketListener, Runnable {
 
     public void run() {
     }
- 
-    // public void sendBlockedChannels() {
-    //     gui.Service.errorNewChannel(channels);
-    // }
+
+    public String[] getBlockedChannels() {
+        return (blockedChannels);
+    }
 
     public void sendMessage(String message, boolean isSmile) {
         Payload payload = new Payload(Payload.Type.ANSWER);
@@ -130,8 +131,7 @@ public class Client implements SocketListener, Runnable {
                     gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;
             case ONGOING:
-                String channels[] = payload.getProps().get("blockedChannels").split("\2");
-                // sendBlockedChannels(channels);
+                blockedChannels = payload.getProps().get("blockedChannels").split("\2"); 
                 System.out.println(payload.toString());
                 break;
             case CLOSE:
