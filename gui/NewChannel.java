@@ -5,8 +5,9 @@ import java.awt.*;
 
 public class NewChannel extends MyPanel {
     private JTextField error;
+    private JTextField title;
     public NewChannel(CardLayout cardLayout, JPanel cardPanel){
-        JTextField title = new MyTextField("Name of new channel");
+        title = new MyTextField("Name of new channel");
         this.panel.add(title);
         error = MyTextField.BorderEmpty("This channel is already in game");
         this.panel.add(error);
@@ -16,10 +17,13 @@ public class NewChannel extends MyPanel {
         this.panel.add(MyButton.createBSaveChannel(title));
     }
 
-    public void errorVisible() {
-//        for(String channel : channels){
-//            if(channel)
-//        }
-        error.setVisible(true);
+    public void errorVisible(String [] channels) {
+        for(String channel : channels){
+            if(channel.equals(title.getText())){
+                error.setVisible(true);
+                return;
+            }
+        }
+        network.Client.getInstance().sendChannel(title.getText());
     }
 }
