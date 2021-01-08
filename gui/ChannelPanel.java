@@ -83,8 +83,6 @@ public class ChannelPanel extends JPanel {
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
 
-        this.image("go.png", "find the name of this pokemon !!");
-        this.music("test", "give the name of this music");
     }
 
     public JPanel messagesStructure(String nickname, String avatar){

@@ -19,11 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f7ee604-2da1-4f48-97b1-8f16280ef1aa" name="Default Changelist" comment="correction affichage utilisateurs">
+    <list default="true" id="2f7ee604-2da1-4f48-97b1-8f16280ef1aa" name="Default Changelist" comment="boutons de début et de fin de jeu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/ChannelPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/ChannelPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/NewChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/NewChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/Service.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610047936938</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="boutons de début et de fin de jeu">
+      <created>1610094255665</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1610094255665</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,7 +235,8 @@
     <MESSAGE value="bouton quitter" />
     <MESSAGE value="ajout d'image et de music pour le blind test" />
     <MESSAGE value="correction affichage utilisateurs" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction affichage utilisateurs" />
+    <MESSAGE value="boutons de début et de fin de jeu" />
+    <option name="LAST_COMMIT_MESSAGE" value="boutons de début et de fin de jeu" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2360" y="99" key="#Project_Structure" timestamp="1610028342902">
@@ -278,10 +283,10 @@
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
     <state x="2360" y="99" key="SettingsEditor/0.0.1536.834/1920.0.1920.1050/3840.0.1280.994@1920.0.1920.1050" timestamp="1610037138733" />
-    <state x="2472" y="257" key="Vcs.Push.Dialog.v2" timestamp="1610047943502">
+    <state x="2472" y="257" key="Vcs.Push.Dialog.v2" timestamp="1610094275517">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="2472" y="257" key="Vcs.Push.Dialog.v2/0.0.1536.834/1920.0.1920.1050/3840.0.1280.994@1920.0.1920.1050" timestamp="1610047943502" />
+    <state x="2472" y="257" key="Vcs.Push.Dialog.v2/0.0.1536.834/1920.0.1920.1050/3840.0.1280.994@1920.0.1920.1050" timestamp="1610094275517" />
     <state x="2697" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610055922523">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
