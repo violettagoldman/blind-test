@@ -6,12 +6,15 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.io.File;
 
 public class ChannelPanel extends JPanel {
     private final String title;
+    private final String id;
+    private final JPanel messagesZone;
+    private final JPanel listUser;
+    private final  JScrollPane scrollMessages;
+    private final MyButton quit;
+    private final JButton go;
 
     public String getTitle() { return title; }
 
@@ -20,12 +23,6 @@ public class ChannelPanel extends JPanel {
     public JPanel getMessagesZone() { return messagesZone; }
 
     public JPanel getListUser() {return listUser; }
-
-    private final String id;
-    private final JPanel messagesZone;
-    private final JPanel listUser;
-    private final  JScrollPane scrollMessages;
-    private final MyButton quit;
 
     public ChannelPanel(String title, String id, String user){
         this.title = title;
@@ -36,7 +33,8 @@ public class ChannelPanel extends JPanel {
         JPanel menu = new JPanel();
         menu.setLayout(new FlowLayout(FlowLayout.LEFT));
         menu.add(MyButton.createBNameChannel(title));
-        menu.add(MyButton.createBGo());
+        go = MyButton.createBGo();
+        menu.add(go);
         quit = MyButton.createBQuit();
         menu.add(quit);
         quit.setVisible(false);
@@ -214,6 +212,9 @@ public class ChannelPanel extends JPanel {
 
     public void quitVisible(){
         quit.setVisible(true);
+    }
+    public void goNotVisible(){
+        quit.setVisible(false);
     }
 
 }

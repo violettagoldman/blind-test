@@ -17,6 +17,9 @@ public class NewChannel extends MyPanel {
     }
 
     public void errorVisible() {
+//        for(String channel : channels){
+//            if(channel)
+//        }
         error.setVisible(true);
     }
 }

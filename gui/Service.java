@@ -36,4 +36,12 @@ public class Service {
     public static void errorNewChannel(){
         GUI.getNewChannel().errorVisible();
     }
+
+    public static void startGame(String title){
+        channelsMap.get(title).goNotVisible();
+    }
+
+    public static void endGame(String title){
+        channelsMap.get(title).goNotVisible();
+    }
 }
