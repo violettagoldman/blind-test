@@ -104,10 +104,7 @@ public class MyButton extends JButton {
         bSaveChannel.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Service.addChannel(title.getText(), "user");
                 network.Client.getInstance().sendChannel(title.getText());
-                title.setText("Name of new channel");
-                GUI.getCardWindow().show(GUI.getWindow(), "channels");
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
