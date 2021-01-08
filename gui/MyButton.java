@@ -119,7 +119,7 @@ public class MyButton extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                network.Client.getInstance().sendConnection(nickname.getText(), login.getAvatar());
-                GUI.getCardWindow().show(GUI.getWindow(), "new channel");}
+               GUI.getCardWindow().show(GUI.getWindow(), "new channel");}
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
         return bLogin;
@@ -132,7 +132,6 @@ public class MyButton extends JButton {
         bNameChannel.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                network.Client.getInstance().sendChannel(title);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
