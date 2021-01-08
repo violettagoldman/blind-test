@@ -7,6 +7,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import game.Question;
 import game.Quiz;
+import gui.Service;
 import network.Payload.Type;
 
 public class Client implements SocketListener, Runnable {
@@ -161,6 +162,13 @@ public class Client implements SocketListener, Runnable {
                 // revenir à l'écran avec channels
                 System.out.println("END.");
                 break;
+            case QUIT:
+                System.out.println("QUIT THE BUTTON");
+                gui.Service.endGame(this.channel);
+                break;
+            case GO:
+                System.out.println("GO BUTTON" + this.channel);
+                gui.Service.startGame(this.channel);
         }
     }
 }

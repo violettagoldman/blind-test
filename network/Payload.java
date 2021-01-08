@@ -14,6 +14,8 @@ public final class Payload {
         ONGOING,
         QUESTION,
         CLOSE,
+        QUIT,
+        GO,
     }
 
     private final Type type;

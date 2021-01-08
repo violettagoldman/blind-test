@@ -20,7 +20,7 @@ public class Server implements Runnable, SocketListener {
 
     final int POINTS = 3;
     final int SECONDSCLOSE = 10;
-    final int SECONDSTIMEOUT = 5;
+    final int SECONDSTIMEOUT = 3;
 
     public Server() {
         this.sockets = new ArrayList<SocketManager>();
@@ -139,7 +139,7 @@ public class Server implements Runnable, SocketListener {
 
     public void closeChannel(String channel) {
         Payload payload = new Payload(Payload.Type.CLOSE);
-        broadcastChannel(payload, channel);;
+        broadcastChannel(payload, channel);
         questions.remove(channel);
         timers.remove(channel);
         sendOngoing();
@@ -151,6 +151,8 @@ public class Server implements Runnable, SocketListener {
         timers.get(channel).cancel();
         timers.put(channel, new Timer());
         timers.get(channel).schedule(new CloseTask(channel), SECONDSCLOSE * 1000);
+        Payload payload = new Payload(Payload.Type.QUIT);
+        broadcastChannel(payload, channel);
     }
 
     class CloseTask extends TimerTask {
@@ -223,6 +225,9 @@ public class Server implements Runnable, SocketListener {
         }
         if (payload.getType() == Payload.Type.ONGOING) {
             chooseQuestion(activeUsers.get(sm).getChannel());
+            Payload go = new Payload("GO");
+            broadcastChannel(go, activeUsers.get(sm).getChannel());
+
         }
     }
 }
