@@ -60,17 +60,10 @@ public class Client implements SocketListener, Runnable {
         // }
         // scanner.close();
     }
-
-    // private Payload buildPayloadMessage(String message, boolean isSmile, String channel) {
-    //     Payload payload = new Payload(Payload.Type.ANSWER);
-    //     payload.addProperty("message", message);
-    //     payload.addProperty("user", user);
-    //     payload.addProperty("smile", isSmile + "");
-    //     payload.addProperty("channel", channel);
-    //     return (payload);
-    // }
-
  
+    public void sendBlockedchannels(String[] channels) {
+        gui.Service.errorNewChannel(channels);
+    }
 
     public void sendMessage(String message, boolean isSmile) {
         Payload payload = new Payload(Payload.Type.ANSWER);
@@ -156,11 +149,12 @@ public class Client implements SocketListener, Runnable {
                 break;
             case ONGOING:
                 String channels[] = payload.getProps().get("blockedChannels").split("\2");
+                sendBlockedChannels(channels);
                 System.out.println(payload.toString());
                 break;
             case CLOSE:
-                // revenir à l'écran avec channels
                 System.out.println("END.");
+                gui.Service.returnNewChanel(this.channel);
                 break;
             case QUIT:
                 System.out.println("QUIT THE BUTTON");
