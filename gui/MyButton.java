@@ -38,11 +38,9 @@ public class MyButton extends JButton {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 setBackground(MyColor.green());
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 setBackground(MyColor.grayWithe());
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 setBackground(MyColor.grayWithe());
             }
@@ -100,45 +98,6 @@ public class MyButton extends JButton {
         return send;
     }
 
-    public static MyButton createBNewChannel(){
-        MyButton bNewChannel = new MyButton("New channel");
-        bNewChannel.setPreferredSize(new Dimension(100,20));
-        bNewChannel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                GUI.getCardWindow().show(GUI.getWindow(), "new channel");
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bNewChannel;
-    }
-
-
-    public static MyButton createBChannels(CardLayout cardLayout, JPanel cardPanel){
-        MyButton bProfile = new MyButton("Channels");
-        bProfile.setPreferredSize(new Dimension(100,20));
-        bProfile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                GUI.getCardWindow().show(GUI.getWindow(), "channels");
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bProfile;
-    }
-
-    public static MyButton createBDeconnect(CardLayout cardLayout, JPanel cardPanel){
-        MyButton bSignUp = new MyButton("Deconnect");
-        bSignUp.setPreferredSize(new Dimension(100,20));
-        bSignUp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) { }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                GUI.getCardWindow().show(GUI.getWindow(), "login");}
-            public void mouseExited(java.awt.event.MouseEvent evt) { }
-        });
-        return bSignUp;
-    }
-
     public static MyButton createBSaveChannel(JTextField title){
         MyButton bSaveChannel = new MyButton("Create new channel");
         bSaveChannel.setPreferredSize(new Dimension(100,20));
@@ -176,7 +135,7 @@ public class MyButton extends JButton {
         bNameChannel.addMouseListener(new java.awt.event.MouseAdapter (){
             public void mouseEntered(java.awt.event.MouseEvent evt) { }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                //network.Client.getInstance().sendChannel(title);
+                network.Client.getInstance().sendChannel(title);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) { }
         });
