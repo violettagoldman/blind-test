@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/violettagoldman/Downloads/org_junit_platform_junit-platform-console-standalone_1.6.0_junit-platform-console-standalone-1.6.0.jar",
+        "/Users/violettagoldman/Downloads/commons-lang3-3.11/*.jar",
+        "/Users/violettagoldman/Downloads/commons-text-1.9/*.jar"
+    ]
+}

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Quiz {
     private static final Quiz quiz = new Quiz();
@@ -49,6 +53,35 @@ public class Quiz {
         questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "../game/assets/images/1.jpg"));
         questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Damso", "../game/assets/images/2.jpg"));
         questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Alpha Wann", "../game/assets/images/3.jpg"));
+    }
+
+    public static boolean checkAnswer(String reply, String solution) {
+            // In lowercase
+        reply = reply.toLowerCase();
+        solution = solution.toLowerCase();
+
+            // Removal of accents
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
+        String strTempReply = Normalizer.normalize(reply, Normalizer.Form.NFD);
+        reply = pattern.matcher(strTempReply).replaceAll("");
+
+        String strTempSolution = Normalizer.normalize(solution, Normalizer.Form.NFD);
+        solution = pattern.matcher(strTempSolution).replaceAll("");
         
+            // Removal of special characters
+        String regex = "[^a-z0-9œæ\\s]";
+
+        reply = reply.replaceAll(regex, "");
+        solution = solution.replaceAll(regex, "");
+        
+            // Get percentage and compare
+        double distance = StringUtils.getJaroWinklerDistance(reply, solution);
+
+        if (distance < 0.95) {
+            return false;
+        }
+
+        return true;
     }
 }

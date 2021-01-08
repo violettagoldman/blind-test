@@ -19,8 +19,8 @@ public class Server implements Runnable, SocketListener {
     private final Map<String, Timer> timers;
 
     final int POINTS = 3;
-    final int SECONDSCLOSE = 10;
-    final int SECONDSTIMEOUT = 3;
+    final int SECONDSCLOSE = 60;
+    final int SECONDSTIMEOUT = 60;
 
     public Server() {
         this.sockets = new ArrayList<SocketManager>();
@@ -148,12 +148,20 @@ public class Server implements Runnable, SocketListener {
     public void endGame(String channel, User u) {
         String msg = u.getName() + " has won! You have one minute to leave the room. See you!";
         sendMessage(msg, channel);
-        questions.put(channel, -1);
+        questions.put(channel, -2);
+        sendOngoing();
         timers.get(channel).cancel();
         timers.put(channel, new Timer());
         timers.get(channel).schedule(new CloseTask(channel), SECONDSCLOSE * 1000);
         Payload payload = new Payload(Payload.Type.QUIT);
+        broadcastLeaderboard(channel);
         broadcastChannel(payload, channel);
+        for (SocketManager m : activeUsers.keySet()) {
+            if (activeUsers.get(m).getChannel().equals(channel)) {
+                activeUsers.get(m).setScore(0);
+                activeUsers.get(m).setChannel("");
+            }
+        }
     }
 
     class CloseTask extends TimerTask {
@@ -176,11 +184,18 @@ public class Server implements Runnable, SocketListener {
 
     @Override
     public void onDisconnection(SocketManager sm) {
-        sockets.remove(sm);
-        broadcastLeaderboard(activeUsers.get(sm).getChannel());
+        String channel = activeUsers.get(sm).getChannel();
         activeUsers.remove(sm);
+        broadcastLeaderboard(channel);
         Payload payload = new Payload(Payload.Type.DISCONNECTION);
         broadcast(payload);
+        boolean hasSomeone = false;
+        for (SocketManager m : activeUsers.keySet()) {
+            if (activeUsers.get(m).getChannel().equals(channel))
+                hasSomeone = true;
+        }
+        if (!hasSomeone)
+            closeChannel(channel);
     }
 
     @Override
@@ -198,14 +213,16 @@ public class Server implements Runnable, SocketListener {
         if (payload.getType() == Payload.Type.CHANNEL && activeUsers.get(sm) != null) {
             activeUsers.get(sm).setChannel(payload.getProps().get("channel"));
             questions.put(payload.getProps().get("channel"), -1);
+            activeUsers.get(sm).setScore(0); //just added
             broadcastLeaderboard(payload.getProps().get("channel"));
         }
         if (payload.getType() == Payload.Type.ANSWER) {
             // checker la réponse
             broadcastChannel(payload, activeUsers.get(sm).getChannel());
-            if (questions.get(activeUsers.get(sm).getChannel()) != -1) // check if the game has started
+            if (questions.get(activeUsers.get(sm).getChannel()) >= 0) // check if the game has started
             {
-                if (payload.getProps().get("message").length() == 2) {
+                if (game.Quiz.checkAnswer(payload.getProps().get("message"), game.Quiz.getInstance().get(questions.get(activeUsers.get(sm).getChannel())).getAnswer()))
+                {
                     timers.get(activeUsers.get(sm).getChannel()).cancel();
                     sendMessage(activeUsers.get(sm).getName() + " has the answer!", activeUsers.get(sm).getChannel());
                     activeUsers.get(sm).incrementScore();
@@ -227,6 +244,8 @@ public class Server implements Runnable, SocketListener {
         if (payload.getType() == Payload.Type.ONGOING) {
             chooseQuestion(activeUsers.get(sm).getChannel());
             Payload go = new Payload("GO");
+            activeUsers.get(sm).setScore(0);
+            broadcastLeaderboard(activeUsers.get(sm).getChannel());
             broadcastChannel(go, activeUsers.get(sm).getChannel());
 
         }

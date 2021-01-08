@@ -10,7 +10,7 @@ CLASSES = network/*.java \
 		game/*.java
 
 all:
-	$(JC) $(CLASSES)
+	$(JC) -cp "/Users/violettagoldman/Downloads/commons-lang3-3.11/commons-lang3-3.11.jar:/Users/violettagoldman/Downloads/commons-lang3-3.11/commons-lang3-3.11-tests.jar:/Users/violettagoldman/Downloads/commons-lang3-3.11/commons-lang3-3.11-sources.jar:/Users/violettagoldman/Downloads/commons-lang3-3.11/commons-lang3-3.11-javadoc.jar" $(CLASSES)
 
 run: all
 	java network.Client
