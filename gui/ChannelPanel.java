@@ -213,6 +213,7 @@ public class ChannelPanel extends JPanel {
     }
     public void goNotVisible(){
         go.setVisible(false);
+        this.validate();
     }
 
 }
