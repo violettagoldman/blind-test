@@ -15,7 +15,6 @@ public class Client implements SocketListener, Runnable {
     private String user;
     private String avatar;
     private Thread thread;
-    private String channels[];
     
     // private LinkedBlockingQueue<String> messages = new LinkedBlockingQueue<>();
     private LinkedBlockingQueue<Payload> payloads = new LinkedBlockingQueue<>();
@@ -29,13 +28,6 @@ public class Client implements SocketListener, Runnable {
     
     public Client() {
     }
-
-    // public void setUser(String user) {
-    //     Client cl = Client.getInstance();
-    //     this.user = user;
-    //     cl.sendConnection();
-    //     cl.sendChannel(channel);
-    // }
 
     public static Client getInstance() {
         return (client);
@@ -54,18 +46,11 @@ public class Client implements SocketListener, Runnable {
     }
 
     public void run() {
-        // Scanner scanner = new Scanner(System.in);
-        // while (scanner.hasNextLine()) {
-        //     String message = scanner.nextLine();
-        //     Payload payload = buildPayloadMessage(message, false, "Team Violetta");
-        //     sm.send(payload);
-        // }
-        // scanner.close();
     }
  
-    public void sendBlockedChannels() {
-        gui.Service.errorNewChannel(channels);
-    }
+    // public void sendBlockedChannels() {
+    //     gui.Service.errorNewChannel(channels);
+    // }
 
     public void sendMessage(String message, boolean isSmile) {
         Payload payload = new Payload(Payload.Type.ANSWER);
@@ -98,15 +83,10 @@ public class Client implements SocketListener, Runnable {
         sm.send(payload);
     }
 
-    // public void publishMessage(String message) {
-    //     messages.offer(message);
-    // }
-
     public static void main(String[] argv) {
         new gui.GUI().setVisible(true);
         Client cl = Client.getInstance();
         cl.start();
-        // cl.sendMessage();
         cl.run();
     }
 
@@ -150,7 +130,7 @@ public class Client implements SocketListener, Runnable {
                     gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;
             case ONGOING:
-                channels = payload.getProps().get("blockedChannels").split("\2");
+                String channels[] = payload.getProps().get("blockedChannels").split("\2");
                 // sendBlockedChannels(channels);
                 System.out.println(payload.toString());
                 break;
