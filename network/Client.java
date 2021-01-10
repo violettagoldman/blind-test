@@ -1,6 +1,7 @@
 package network;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -127,6 +128,15 @@ public class Client implements SocketListener, Runnable {
                 System.out.println(this.channel +  question.getMedia() + question.getQuestion());
                 if (question.getType() == Question.Type.IMAGE)
                     gui.Service.addImage(this.channel, question.getMedia(), question.getQuestion());
+                if (question.getType() == Question.Type.AUDIO) {
+                    try {
+                        Service.addMusic(this.channel, question.getMedia(), question.getQuestion());
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 else
                     gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
                 break;

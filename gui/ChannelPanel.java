@@ -1,8 +1,14 @@
 package gui;
 
+import game.tracks.GetTrack;
+import game.tracks.Song;
+import jaco.mp3.player.MP3Player;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -181,15 +187,25 @@ public class ChannelPanel extends JPanel {
         downVerticalScroll();
     }
 
-    public void music(String music, String text){
+    public void music(String music, String text) throws MalformedURLException, InterruptedException {
         JPanel messageStruct = messagesStructure(text, "musicQuestion.png");
-
-        //jouer le morceau de musique
 
         messagesZone.add(messageStruct);
         messagesZone.validate();
         scrollMessages.validate();
         downVerticalScroll();
+
+        Song.setId(music);
+        String previewUrl = GetTrack.getPreviewUrl();
+        URL testUrl = new URL(previewUrl);
+        MP3Player player = new MP3Player(testUrl);
+        System.out.println(previewUrl);
+
+        //jouer le morceau de musique
+        player.play();
+        Thread.sleep(10000);
+
+        player.stop();
     }
 
     public void updateLisUser(String [] users, String [] scores, String [] avatars){

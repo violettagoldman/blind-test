@@ -1,5 +1,6 @@
 package gui;
 
+import java.net.MalformedURLException;
 import java.util.HashMap;
 
 
@@ -25,7 +26,7 @@ public class Service {
         channelsMap.get(title).image(image, text);
     }
 
-    public static void addMusic(String title, String music, String text){
+    public static void addMusic(String title, String music, String text) throws MalformedURLException, InterruptedException {
         channelsMap.get(title).music(music, text);
     }
 

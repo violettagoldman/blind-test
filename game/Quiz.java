@@ -1,5 +1,6 @@
 package game;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,9 +8,12 @@ import java.util.Map;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
+import game.tracks.Playlist;
+import jaco.mp3.player.MP3Player;
 import org.apache.commons.lang3.StringUtils;
 
 public class Quiz {
+
     private static final Quiz quiz = new Quiz();
     List<Question> questions;
     Map<String, ArrayList<Integer>> history;
@@ -50,9 +54,12 @@ public class Quiz {
 
     public void populateQuiz() {
         // add questions here
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Lomepal", "../game/assets/images/1.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Damso", "../game/assets/images/2.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Qui est l'author de cet album?", "Alpha Wann", "../game/assets/images/3.jpg"));
+       // questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Lomepal", "../game/assets/images/1.jpg"));
+       // questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Damso", "../game/assets/images/2.jpg"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Alpha Wann", "../game/assets/images/3.jpg"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Eurythmics", "1TfqLAPs4K3s2rJMoCokcS"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Indochine", "2UC5XnHA1Wn9FjQmbjNca9"));
+
     }
 
     public static boolean checkAnswer(String reply, String solution) {
