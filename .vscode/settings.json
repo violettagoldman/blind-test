@@ -1,0 +1,22 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/violettagoldman/Downloads/org_junit_platform_junit-platform-console-standalone_1.6.0_junit-platform-console-standalone-1.6.0.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/spotify-web-api-java-6.5.1.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/slf4j-jdk14-1.7.24.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/slf4j-api-1.7.30.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/slf4j-api-1.7.24.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/nv-i18n-1.27.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/jaco-mp3-player-0.9.3.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/jackson-databind-2.11.2.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/jackson-core-2.11.2.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/jackson-annotations-2.11.2.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/httpcore5-h2-5.0.2.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/httpcore5-5.0.2.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/httpclient5-cache-5.0.3.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/httpclient5-5.0.3.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/gson-2.8.6.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/commons-lang3-3.11.jar",
+        "/Users/violettagoldman/Downloads/jar blindtest/commons-codec-1.13.jar"
+    ]
+}
