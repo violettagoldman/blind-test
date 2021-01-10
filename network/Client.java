@@ -146,7 +146,7 @@ public class Client implements SocketListener, Runnable {
                 System.out.println(payload.toString());
                 break;
             case CLOSE:
-                System.out.println("END.");s
+                System.out.println("END.");
                 gui.Service.returnNewChanel(this.channel);
                 break;
             case QUIT:
