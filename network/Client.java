@@ -37,8 +37,8 @@ public class Client implements SocketListener, Runnable {
 
     public void start() {
         try {
-            // Socket socket = new Socket("135.181.151.73", 6869);
-            Socket socket = new Socket("localhost", 6869);
+            Socket socket = new Socket("135.181.151.73", 6869);
+            // Socket socket = new Socket("localhost", 6869);
             sm = new SocketManager(socket, this);
             thread = new Thread(sm);
             thread.start();
