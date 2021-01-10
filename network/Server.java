@@ -18,8 +18,8 @@ public class Server implements Runnable, SocketListener {
     private final Map<String, Integer> questions;
     private final Map<String, Timer> timers;
 
-    final int POINTS = 4;
-    final int SECONDSCLOSE = 60;
+    final int POINTS = 1;
+    final int SECONDSCLOSE = 6;
     final int SECONDSTIMEOUT = 45;
 
     public Server() {
@@ -144,6 +144,12 @@ public class Server implements Runnable, SocketListener {
         questions.remove(channel);
         timers.remove(channel);
         sendOngoing();
+        for (SocketManager m : activeUsers.keySet()) {
+            if (activeUsers.get(m).getChannel().equals(channel)) {
+                activeUsers.get(m).setScore(0);
+                activeUsers.get(m).setChannel("");
+            }
+        }
     }
 
     public void endGame(String channel, User u) {
@@ -158,12 +164,12 @@ public class Server implements Runnable, SocketListener {
         Payload payload = new Payload(Payload.Type.QUIT);
         broadcastLeaderboard(channel);
         broadcastChannel(payload, channel);
-        for (SocketManager m : activeUsers.keySet()) {
-            if (activeUsers.get(m).getChannel().equals(channel)) {
-                activeUsers.get(m).setScore(0);
-                activeUsers.get(m).setChannel("");
-            }
-        }
+        // for (SocketManager m : activeUsers.keySet()) {
+        //     if (activeUsers.get(m).getChannel().equals(channel)) {
+        //         activeUsers.get(m).setScore(0);
+        //         activeUsers.get(m).setChannel("");
+        //     }
+        // }
     }
 
     class CloseTask extends TimerTask {
