@@ -124,6 +124,7 @@ public class Client implements SocketListener, Runnable {
                     gui.Service.updateUsersConnected(users, score, avatars, this.channel);
                 break;
             case QUESTION:
+                gui.Service.stopPlayer(this.channel);
                 Question question = Quiz.getInstance().get(Integer.parseInt(payload.getProps().get("id")));
                 System.out.println(this.channel +  question.getMedia() + question.getQuestion());
                 if (question.getType() == Question.Type.IMAGE)
@@ -149,6 +150,7 @@ public class Client implements SocketListener, Runnable {
                 gui.Service.returnNewChanel(this.channel);
                 break;
             case QUIT:
+                gui.Service.stopPlayer(this.channel);
                 System.out.println("QUIT THE BUTTON");
                 gui.Service.endGame(this.channel);
                 break;

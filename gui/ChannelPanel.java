@@ -21,6 +21,7 @@ public class ChannelPanel extends JPanel {
     private final  JScrollPane scrollMessages;
     private final MyButton quit;
     private final JButton go;
+    private MP3Player player;
 
     public String getTitle() { return title; }
 
@@ -88,6 +89,11 @@ public class ChannelPanel extends JPanel {
         write.add(MyButton.createBSend(writeScript), BorderLayout.EAST );
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
+    }
+
+    public void stopPlayer() {
+        if (this.player != null)
+            this.player.stop();
     }
 
     public JPanel messagesStructure(String nickname, String avatar){
@@ -197,7 +203,7 @@ public class ChannelPanel extends JPanel {
         Song.setId(music);
         String previewUrl = GetTrack.getPreviewUrl();
         URL testUrl = new URL(previewUrl);
-        MP3Player player = new MP3Player(testUrl);
+        this.player = new MP3Player(testUrl);
         System.out.println(previewUrl);
 
         //jouer le morceau de musique

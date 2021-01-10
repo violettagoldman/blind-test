@@ -46,6 +46,10 @@ public class Service {
         channelsMap.get(title).quitVisible();
     }
 
+    public static void stopPlayer(String title){
+        channelsMap.get(title).stopPlayer();
+    }
+
     public static void returnNewChanel(String title){
         GUI.getCardWindow().show(GUI.getWindow(), "new channel");
         GUI.getCardWindow().removeLayoutComponent(channelsMap.get(title));
