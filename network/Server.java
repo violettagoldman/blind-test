@@ -187,6 +187,8 @@ public class Server implements Runnable, SocketListener {
 
     @Override
     public void onDisconnection(SocketManager sm) {
+        if (activeUsers.get(sm) == null)
+            return ;
         String channel = activeUsers.get(sm).getChannel();
         activeUsers.remove(sm);
         broadcastLeaderboard(channel);
@@ -194,7 +196,7 @@ public class Server implements Runnable, SocketListener {
         broadcast(payload);
         boolean hasSomeone = false;
         for (SocketManager m : activeUsers.keySet()) {
-            if (activeUsers.get(m).getChannel().equals(channel))
+            if (activeUsers.get(m) != null && activeUsers.get(m).getChannel().equals(channel))
                 hasSomeone = true;
         }
         if (!hasSomeone)
