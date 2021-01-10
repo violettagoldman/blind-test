@@ -51,12 +51,24 @@ public class Quiz {
 
     public void populateQuiz() {
         // add questions here
-       // questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Lomepal", "../game/assets/images/1.jpg"));
-       // questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Damso", "../game/assets/images/2.jpg"));
-        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Alpha Wann", "../game/assets/images/3.jpg"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Eurythmics", "1TfqLAPs4K3s2rJMoCokcS"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Indochine", "2UC5XnHA1Wn9FjQmbjNca9"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Pink Floyd", "2WT1pbYjLJciAR26yMebkH"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Daft Punk", "4m2880jivSbbyEGAKfITCa"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "The Beatles", "0ETFjACtuP2ADo6LFhL6HN"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Damso", "7JJ1Zqwc0m0cDyXXodXCqb"));
+        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Daft Punk", "4m2880jivSbbyEGAKfITCa"));
 
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Eurythmics", "1TfqLAPs4K3s2rJMoCokcS"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Britney Spears", "6I9VzXrHxO9rA9A5euc8Ak"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Oasis", "1qPbGZqppFwLwcBC1JQ6Vr"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Europe", "3MrRksHupTVEQ7YbA0FsZK"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Scorpions", "0RdUX4WE0fO30VnlUbDVL6"));
+
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Francis Cabrel", "40U2kuipBVRrReD32J2lmO"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Jean Jacques Goldman", "55mXuPsEm6aboDIM68RM74"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Renaud", "7eJdx83TiKsVqAzLFBelMO"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Claude François", "1zcFnMc6ULvzH8npblFGvy"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Oldelaf", "0jJB62nm6LZ0E7KRxzENS3"));
+        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Christophe", "1N4ixxhbBH1ClnPdTTsRzz"));
     }
 
     public static boolean checkAnswer(String reply, String solution) {

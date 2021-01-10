@@ -1,5 +1,7 @@
 package gui;
 
+import game.tracks.Album;
+import game.tracks.GetAlbum;
 import game.tracks.GetTrack;
 import game.tracks.Song;
 import jaco.mp3.player.MP3Player;
@@ -12,6 +14,8 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static game.tracks.GetAlbum.getImageUrl;
 
 public class ChannelPanel extends JPanel {
     private final String title;
@@ -169,17 +173,24 @@ public class ChannelPanel extends JPanel {
         downVerticalScroll();
     }
 
-    public void image(String image, String text){
+    public void image(String imageId, String text){
         JPanel messageStruct = messagesStructure(text, "imageQuestion.png");
-        ImageIcon imageIcon = new ImageIcon( MyButton.class.getResource(image));
-        ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
-        JLabel jlabel = new JLabel(imageIcon2);
-        jlabel.setPreferredSize(new Dimension(300,300));
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(jlabel, BorderLayout.WEST);
-        panel.setBackground(MyColor.gray());
-        messageStruct.add(panel, BorderLayout.CENTER);
+        try {
+            Album.setId(imageId);
+            String imageUrl = GetAlbum.getImageUrl(imageId);
+            URL url = new URL(imageUrl);
+            ImageIcon image = new ImageIcon(url);
+            ImageIcon image2 = new ImageIcon(image.getImage().getScaledInstance(300, 300, Image.SCALE_DEFAULT));
+            JLabel jlabel = new JLabel(image2, JLabel.CENTER);
+            jlabel.setPreferredSize(new Dimension(300,300));
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            panel.add(jlabel, BorderLayout.WEST);
+            panel.setBackground(MyColor.gray());
+            messageStruct.add(panel, BorderLayout.CENTER);
+        }catch (Exception e){
+        }
+
         messagesZone.add(messageStruct);
 
         JPanel south = new JPanel();

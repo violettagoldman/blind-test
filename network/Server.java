@@ -18,7 +18,7 @@ public class Server implements Runnable, SocketListener {
     private final Map<String, Integer> questions;
     private final Map<String, Timer> timers;
 
-    final int POINTS = 3;
+    final int POINTS = 12;
     final int SECONDSCLOSE = 60;
     final int SECONDSTIMEOUT = 60;
 
