@@ -54,7 +54,6 @@ public class Quiz {
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Pink Floyd", "2WT1pbYjLJciAR26yMebkH"));
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Daft Punk", "4m2880jivSbbyEGAKfITCa"));
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "The Beatles", "0ETFjACtuP2ADo6LFhL6HN"));
-        questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Damso", "7JJ1Zqwc0m0cDyXXodXCqb"));
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "PNL", "2JtKf1aFxqS0M3QIj98nG5"));
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Damso", "7JJ1Zqwc0m0cDyXXodXCqb"));
         questions.add(new Question(Question.Type.IMAGE, "Who is the author of this album ?", "Lomepal", "0n4P6BsuT61HgsKExU0i1R"));
@@ -66,10 +65,6 @@ public class Quiz {
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Europe", "3MrRksHupTVEQ7YbA0FsZK"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Scorpions", "0RdUX4WE0fO30VnlUbDVL6"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Ed Sheeran", "7qiZfU4dY1lWllzX7mPBI3"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Avicii", "6g1NlCpW7fgqDnWbCCDrHl"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Luis Fonsi", "6habFhsOp2NvshLv26DqMb"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Billie Eilish", "2Fxmhks0bxGSBdJ92vM42m"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "The Police", "1oYYd2gnWZYrt89EBXdFiO"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Miles Davis", "2x91iJc0UkFcjRMEZ2CoWB"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "TOTO", "2374M0fQpWi3dLnB54qaLX"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Dua Lipa", "3PfIrDoz19wz7qK7tYeu62"));
@@ -77,11 +72,8 @@ public class Quiz {
 
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Francis Cabrel", "40U2kuipBVRrReD32J2lmO"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Jean Jacques Goldman", "55mXuPsEm6aboDIM68RM74"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Renaud", "3v6ClatJ2nG0TIpfL3HwY1"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Claude François", "1zcFnMc6ULvzH8npblFGvy"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Oldelaf", "0jJB62nm6LZ0E7KRxzENS3"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Christophe", "1N4ixxhbBH1ClnPdTTsRzz"));
-        questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Daniel Balavoine", "1N4ixxhbBH1ClnPdTTsRzz"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Jacques Dutronc", "4fWJeO8FlmNDgjeZkQkU30"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Julie Pietri", "3MPmRgJHfD7CADCibQfNgG"));
         questions.add(new Question(Question.Type.AUDIO, "Who is the singer ?", "Magic System", "3s6ltUrI93LBKU8taezsLn"));

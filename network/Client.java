@@ -17,7 +17,7 @@ public class Client implements SocketListener, Runnable {
     private String avatar;
     private Thread thread;
     private String[] blockedChannels;
-    
+
     // private LinkedBlockingQueue<String> messages = new LinkedBlockingQueue<>();
     private LinkedBlockingQueue<Payload> payloads = new LinkedBlockingQueue<>();
     private static final Client client = new Client();
@@ -27,7 +27,7 @@ public class Client implements SocketListener, Runnable {
         this.user = user;
         start();
     }
-    
+
     public Client() {
     }
 
@@ -38,7 +38,7 @@ public class Client implements SocketListener, Runnable {
     public void start() {
         try {
             Socket socket = new Socket("135.181.151.73", 6869);
-            // Socket socket = new Socket("localhost", 6869);
+            //Socket socket = new Socket("localhost", 6869);
             sm = new SocketManager(socket, this);
             thread = new Thread(sm);
             thread.start();
@@ -142,7 +142,7 @@ public class Client implements SocketListener, Runnable {
                     gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "../game/assets/images/bot.png");
                 break;
             case ONGOING:
-                blockedChannels = payload.getProps().get("blockedChannels").split("\2"); 
+                blockedChannels = payload.getProps().get("blockedChannels").split("\2");
                 System.out.println(payload.toString());
                 break;
             case CLOSE:

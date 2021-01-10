@@ -77,3 +77,12 @@ public class GUI extends JFrame {
         return newChannel;
     }
 }
+
+//try {
+//        URL url = new URL("https://i.scdn.co/image/ab67616d0000b273efc6988972cb04105f002cd4");
+//        image = new ImageIcon(url);
+//        ImageIcon image2 = new ImageIcon(image.getImage().getScaledInstance(50, 55, Image.SCALE_DEFAULT));
+//        JLabel jlabel = new JLabel(image2, JLabel.CENTER);
+//        north.add(jlabel, BorderLayout.CENTER);
+//        }catch (Exception e){
+//        }

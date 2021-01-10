@@ -9,6 +9,9 @@ import jaco.mp3.player.MP3Player;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -90,7 +93,21 @@ public class ChannelPanel extends JPanel {
         writeScript.setBackground(MyColor.white());
         writeScript.setFont(new Font("SansSerif", Font.PLAIN, 15));
         writeScript.setForeground(MyColor.black());
-        write.add(MyButton.createBSend(writeScript), BorderLayout.EAST );
+        MyButton button = MyButton.createBSend(writeScript);
+        write.add(button, BorderLayout.EAST );
+        writeScript.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    e.consume();
+                    if (!writeScript.getText().equals("")) {
+                        String str = writeScript.getText();
+                        network.Client.getInstance().sendMessage(str, false);
+                        writeScript.setText("");
+                    }
+                }
+            }
+        });
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
     }
