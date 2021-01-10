@@ -128,7 +128,7 @@ public class Client implements SocketListener, Runnable {
                 System.out.println(this.channel +  question.getMedia() + question.getQuestion());
                 if (question.getType() == Question.Type.IMAGE)
                     gui.Service.addImage(this.channel, question.getMedia(), question.getQuestion());
-                if (question.getType() == Question.Type.AUDIO) {
+                else if (question.getType() == Question.Type.AUDIO) {
                     try {
                         Service.addMusic(this.channel, question.getMedia(), question.getQuestion());
                     } catch (MalformedURLException e) {
@@ -138,7 +138,7 @@ public class Client implements SocketListener, Runnable {
                     }
                 }
                 else
-                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "avatar/2.png");
+                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "../game/image/bot.png");
                 break;
             case ONGOING:
                 blockedChannels = payload.getProps().get("blockedChannels").split("\2"); 

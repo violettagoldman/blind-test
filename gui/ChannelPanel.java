@@ -88,7 +88,6 @@ public class ChannelPanel extends JPanel {
         write.add(MyButton.createBSend(writeScript), BorderLayout.EAST );
         write.add(MyButton.createBSeeSmile(smiley,"smileybutton/smile.png"), BorderLayout.WEST );
         this.add(write, BorderLayout.SOUTH );
-
     }
 
     public JPanel messagesStructure(String nickname, String avatar){
@@ -203,9 +202,9 @@ public class ChannelPanel extends JPanel {
 
         //jouer le morceau de musique
         player.play();
-        Thread.sleep(10000);
+        // Thread.sleep(10000);
 
-        player.stop();
+        // player.stop();
     }
 
     public void updateLisUser(String [] users, String [] scores, String [] avatars){
