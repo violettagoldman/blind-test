@@ -1,6 +1,5 @@
 package game;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.Map;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
 
-import game.tracks.Playlist;
-import jaco.mp3.player.MP3Player;
 import org.apache.commons.lang3.StringUtils;
 
 public class Quiz {
