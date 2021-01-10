@@ -101,7 +101,8 @@ public class Server implements Runnable, SocketListener {
         }
 
         public void run() {
-            timers.get(channel).cancel();
+            if (timers.get(channel) != null)
+                timers.get(channel).cancel();
             timesUp(channel);
         }
     }
@@ -150,7 +151,8 @@ public class Server implements Runnable, SocketListener {
         sendMessage(msg, channel);
         questions.put(channel, -2);
         sendOngoing();
-        timers.get(channel).cancel();
+        if (timers.get(channel) != null)
+            timers.get(channel).cancel();
         timers.put(channel, new Timer());
         timers.get(channel).schedule(new CloseTask(channel), SECONDSCLOSE * 1000);
         Payload payload = new Payload(Payload.Type.QUIT);
@@ -172,7 +174,8 @@ public class Server implements Runnable, SocketListener {
         }
 
         public void run() {
-            timers.get(channel).cancel();
+            if (timers.get(channel) != null)
+                timers.get(channel).cancel();
             closeChannel(channel);
         }
     }
@@ -184,6 +187,8 @@ public class Server implements Runnable, SocketListener {
 
     @Override
     public void onDisconnection(SocketManager sm) {
+        if (activeUsers.get(sm) == null)
+            return ;
         String channel = activeUsers.get(sm).getChannel();
         activeUsers.remove(sm);
         broadcastLeaderboard(channel);
@@ -191,7 +196,7 @@ public class Server implements Runnable, SocketListener {
         broadcast(payload);
         boolean hasSomeone = false;
         for (SocketManager m : activeUsers.keySet()) {
-            if (activeUsers.get(m).getChannel().equals(channel))
+            if (activeUsers.get(m) != null && activeUsers.get(m).getChannel().equals(channel))
                 hasSomeone = true;
         }
         if (!hasSomeone)
@@ -223,7 +228,8 @@ public class Server implements Runnable, SocketListener {
             {
                 if (game.Quiz.checkAnswer(payload.getProps().get("message"), game.Quiz.getInstance().get(questions.get(activeUsers.get(sm).getChannel())).getAnswer()))
                 {
-                    timers.get(activeUsers.get(sm).getChannel()).cancel();
+                    if (timers.get(activeUsers.get(sm).getChannel()) != null)
+                        timers.get(activeUsers.get(sm).getChannel()).cancel();
                     sendMessage(activeUsers.get(sm).getName() + " has the answer!", activeUsers.get(sm).getChannel());
                     activeUsers.get(sm).incrementScore();
                     broadcastLeaderboard(activeUsers.get(sm).getChannel());
