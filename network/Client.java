@@ -139,14 +139,14 @@ public class Client implements SocketListener, Runnable {
                     }
                 }
                 else
-                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "../game/image/bot.png");
+                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "../game/assets/images/bot.png");
                 break;
             case ONGOING:
                 blockedChannels = payload.getProps().get("blockedChannels").split("\2"); 
                 System.out.println(payload.toString());
                 break;
             case CLOSE:
-                System.out.println("END.");
+                System.out.println("END.");s
                 gui.Service.returnNewChanel(this.channel);
                 break;
             case QUIT:
