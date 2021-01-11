@@ -121,8 +121,9 @@ public class ChannelPanel extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-
+        System.out.println(avatar);
         //utilisateur et avatar
+        if(avatar.equals("../game/assets/images/bot.png"))avatar="avatar/bot.png";
         JPanel userPlace = new JPanel();
         userPlace.setLayout(new BorderLayout());
         userPlace.setBackground(MyColor.gray());

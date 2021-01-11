@@ -112,7 +112,7 @@ public class Server implements Runnable, SocketListener {
         payload.addProperty("message", message);
         payload.addProperty("user", "BOT");
         payload.addProperty("smile", false + "");
-        payload.addProperty("avatar", "../game/assets/images/bot.png");
+        payload.addProperty("avatar", "avatar/bot.png");
         broadcastChannel(payload, channel);
     }
 

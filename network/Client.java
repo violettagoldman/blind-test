@@ -3,7 +3,6 @@ package network;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import game.Question;
@@ -139,7 +138,7 @@ public class Client implements SocketListener, Runnable {
                     }
                 }
                 else
-                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, "../game/assets/images/bot.png");
+                    gui.Service.addMessage(question.getQuestion(), "BOT", this.channel, payload.getProps().get("avatar"));
                 break;
             case ONGOING:
                 blockedChannels = payload.getProps().get("blockedChannels").split("\2");
